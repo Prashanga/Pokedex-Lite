@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <q-header bordered class="bg-purple-9 text-white" height-hint="98">
+    <q-header bordered class="bg-purple-9 text-white" height-hint=" ">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
@@ -11,10 +11,10 @@
         </q-toolbar-title>
       </q-toolbar>
 
-      <q-tabs align="left">
-        <q-route-tab to="/page1" label="Page One" />
-        <q-route-tab to="/page2" label="Page Two" />
-        <q-route-tab to="/page3" label="Page Three" />
+      <q-tabs align="center">
+        <q-route-tab to="#" label="Page One" />
+        <q-route-tab to="#" label="Page Two" />
+        <q-route-tab to="#" label="Page Three" />
       </q-tabs>
     </q-header>
 
@@ -22,7 +22,7 @@
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
+    <q-footer elevated class="bg-purple-7 text-white">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>

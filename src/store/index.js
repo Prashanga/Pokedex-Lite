@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
-// import example from './module-example'
+import * as pokemon from './modules/pokemon.js'
 
 Vue.use(Vuex)
 
@@ -17,7 +16,7 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      // example
+      pokemon
     },
 
     // enable strict mode (adds overhead!)
