@@ -8,8 +8,6 @@
 <script>
 export default {
   name: 'PageIndex',
-  created: function() {
-    this.$store.dispatch('getPokemons')
-  }
+
 }
 </script>

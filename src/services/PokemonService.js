@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { Store } from '../store/index'
 // const baseUrl = 'https://pokeapi.co/api/v2'
 
 // const apiClient = axios.create({
@@ -13,9 +13,11 @@ import axios from 'axios'
 
 export default {
   getAllPokemons() {
+    console.log(Store.state.pokemon.test)
     return axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=2000')
   },
   getIndividualPokemon(id){
-    return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+    
+    // return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
   }
 }
