@@ -7,6 +7,9 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  created: function() {
+    this.$store.dispatch('getPokemons')
+  }
 }
 </script>
