@@ -1,23 +1,27 @@
 import axios from 'axios'
 import { Store } from '../store/index'
-// const baseUrl = 'https://pokeapi.co/api/v2'
 
-// const apiClient = axios.create({
-//   baseUrl,
-//   withCredentials: false,
-//   headers: {
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json'
-//   }
-// })
+let pokemons = null
 
 export default {
   getAllPokemons() {
-    console.log(Store.state.pokemon.test)
-    return axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=2000')
-  },
-  getIndividualPokemon(id){
+    axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=2000')
+          .then( response => {
+            pokemons = response.data.results
+            Store.dispatch('getPokemons', pokemons)
+          })
+          .then(()=> {
+              if(pokemons.length){
+                pokemons.forEach((pokemon, index) => {
+                  axios.get(pokemon.url)
+                        .then( response=> {
+                          console.log("Pokemon get result:  ", response)
+                        })
+                })
+              }
+          })
+          .catch(err => console.error(err))
     
-    // return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-  }
+  },
+
 }

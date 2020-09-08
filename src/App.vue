@@ -6,14 +6,13 @@
 
 
 <script>
+import PokemonService from './services/PokemonService'
+
 export default {
   name: 'App',
   beforeMount: function() {
-   this.$store.dispatch('getPokemons')
+   PokemonService.getAllPokemons()
   },
-  // beforeMount: function(){
-  //   this.$store.dispatch('setPokemon') 
-    
-  // }
+
 }
 </script>
