@@ -10,7 +10,8 @@ import PokemonService from './services/PokemonService'
 
 export default {
   name: 'App',
-  beforeMount: function() {
+
+  beforeCreate() {
    PokemonService.getAllPokemons()
   },
 
