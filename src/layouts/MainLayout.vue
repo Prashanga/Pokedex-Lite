@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
       <Navbar />
-      <router-view />
+    
     </q-page-container>
   </q-layout>
 </template>
