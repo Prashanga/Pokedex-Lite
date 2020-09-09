@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { Store } from '../store/index'
 
-let pokemons = null
-
 export default {
   async getAllPokemons() {
 
@@ -19,9 +17,7 @@ export default {
           tempPokemons[index] = { ...tempPokemons[index], ...res[index]}
         });
         Store.dispatch('setPokemons', tempPokemons)
-        // console.log("tempPokemons from Promise.all: ", tempPokemons)
       })
     
   },
-
 }
