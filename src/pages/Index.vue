@@ -1,19 +1,18 @@
 <template>
   <q-page class="flex flex-center">
      
-    <div v-if="pokemons.length" class="q-pa-md row items-center q-gutter-md">
+    <div v-if="pokemons.length" class="q-pa-md row justify-center q-gutter-md">
       <div v-for="pokemon in pokemons" :key="pokemon.id">
         <q-card class="my-card">
-          <img height="250px" width="250px" :alt="pokemon.name" :src="pokemon.sprites.other.dream_world.front_default" >
- 
-          <q-card-section>
-            <div class="text-h6">{{ pokemon.name }}</div>
-            <div class="text-subtitle2">by John Doe</div>
+          <q-card-section >
+            <img height="220px" width="225px" :alt="pokemon.name" :src="pokemon.sprites.other.dream_world.front_default" class="q-pt-md">
+          </q-card-section>
+          <q-card-section class=" ">
+            <div class="text-h6 text-center">{{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</div>
+            <div class="text-center">by John Doe gdf dfgdf fgdfg fdgdfdsffg dfgdfg dfgdfgdfds sfgfgf dfgdfg dffgdfgf</div>
           </q-card-section>
 
-          <q-card-section class="q-pt-none">
-            {{ pokemon.name }}
-          </q-card-section>
+                
         </q-card>
        
       </div>
@@ -46,9 +45,7 @@ export default {
     ...mapState({
       pokemons: state => state.pokemon.pokemons
     }),
-    // sprites(){
-    //   if()
-    // }
+ 
   }
 }
 </script>
@@ -56,7 +53,6 @@ export default {
 
 <style lang="sass" scoped>
   .my-card
-    width: 400px
     height: 400px    
-    max-width: 250px
+    max-width: 260px
 </style>
