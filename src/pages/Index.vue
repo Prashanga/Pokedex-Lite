@@ -10,7 +10,7 @@
           <q-card-section class="bottom-card-section ">
             <div class="text-h6 text-center">{{`#${pokemon.id} ` + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</div>
             <!-- <div class="type-icons"> -->
-              <span class="icon icon-bike"></span>
+              <span class="typeIcon" :style="{mask: `url(icons/${pokemon.types[0].type.name}.svg)`, display: 'inline-block', width: '40px', height: '40px', background: 'blue', maskSize: 'cover'}"></span>
                <!-- <object type="image/svg+xml" :data="bugIcon" class="icon">Dragon</object> -->
               <!-- <img height="30px" width="30px" src="../assets/type-icons/dragon.svg" alt="dark"> -->
             <!-- </div> -->
@@ -33,8 +33,9 @@
 
 <script>
 import { mapState } from 'vuex'
-import darkIcon from '../assets/type-icons/dark.svg'
 import bugIcon from '../assets/type-icons/bug.svg'
+import darkIcon from '../assets/type-icons/dark.svg'
+import grassIcon from '../assets/type-icons/grass.svg'
 
 export default {
   name: 'PageIndex',
@@ -44,16 +45,18 @@ export default {
     }
   },
   created() {
-    
-    // this.bugIcon = typeIcons.bug
   this.darkIcon = darkIcon, this.bugIcon = bugIcon
-    // this.dragonIcon = typeIcons.dragon
-    // this.electricIcon = typeIcons.electric
+    
   },
   methods:{
     image(id){
       console.log(id)
       if(id) return this.pokemons[id-1].sprites.other.dream_world.front_default
+    },
+    typeIconCSS(pokemon){
+      return {
+        mask: `../assets/type-icons/${pokemon.types[0].type.name}Icon.svg`
+        }
       
     }
   },
@@ -61,28 +64,30 @@ export default {
     ...mapState({
       pokemons: state => state.pokemon.pokemons
     }),
+    
  
   }
 }
 </script>
 
 
-<style lang="sass" scoped>
-  .my-card
-    height: 360px    
-    width: 300px
-  
-  .bottom-card-section
-    background-color: #f7f7f7
-    height: 140px
+<style >
+  .my-card{
+    height: 360px;    
+    width: 300px;
+  }
 
-  .icon 
-    mask: url('../assets/type-icons/dragon.svg')
-    display: inline-block
-    width: 40px
-    height: 40px
-    background: blue
-    mask-size: cover
+  .bottom-card-section{
+    background-color: #f7f7f7;
+    height: 140px;
+  }
 
-
+  .typeIcon {
+    /* mask: var(--maskURL); */
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: blue;
+    mask-size: cover;
+  }
 </style>
