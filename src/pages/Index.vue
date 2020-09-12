@@ -4,10 +4,10 @@
     <div v-if="pokemons.length" class="q-pa-md row justify-center q-gutter-md">
       <div v-for="pokemon in pokemons" :key="pokemon.id">
         <q-card class="my-card">
-          <q-card-section >
-            <img height="220px" width="225px" :alt="pokemon.name" :src="pokemon.sprites.other.dream_world.front_default" class="q-pt-md">
-          </q-card-section>
-          <q-card-section class=" ">
+         
+          <img height="220px" width="205px" :alt="pokemon.name" :src="pokemon.sprites.other.dream_world.front_default" class="q-pt-xs">
+         
+          <q-card-section class="bottom-card-section ">
             <div class="text-h6 text-center">{{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</div>
             <div class="text-center">by John Doe gdf dfgdf fgdfg fdgdfdsffg dfgdfg dfgdfgdfds sfgfgf dfgdfg dffgdfgf</div>
           </q-card-section>
@@ -19,6 +19,10 @@
     </div>
 
     <div v-else>
+
+
+      <!-- *************    TODO: ADD LOADING SPINNER **************** -->
+
       <p>Loading............</p>
     </div>
   </q-page>
@@ -53,6 +57,11 @@ export default {
 
 <style lang="sass" scoped>
   .my-card
-    height: 400px    
-    max-width: 260px
+    height: 360px    
+    max-width: 300px
+  
+  .bottom-card-section
+    background-color: #f7f7f7
+    height: 140px
+
 </style>

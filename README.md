@@ -1,26 +1,8 @@
 # Pokedex App (pokedex)
 
-Pokedex app for learning Quasar
 
-## Install the dependencies
-```bash
-npm install
-```
-
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
-
-### Lint the files
-```bash
-npm run lint
-```
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+## Sources:
+### API: https://pokeapi.co
+### Type Icons: 
+#### Original: https://dribbble.com/shots/4862612-Pokedex-iOS-app
+#### GitHub: https://github.com/duiker101/pokemon-type-svg-icons
