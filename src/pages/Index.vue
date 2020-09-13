@@ -9,11 +9,9 @@
          
           <q-card-section class="bottom-card-section ">
             <div class="text-h6 text-center">{{`#${pokemon.id} ` + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</div>
-            <!-- <div class="type-icons"> -->
+            
               <span class="typeIcon" :style="{mask: `url(icons/${pokemon.types[0].type.name}.svg)`, display: 'inline-block', width: '40px', height: '40px', background: getTypeIconColor(pokemon.types[0].type.name), maskSize: 'cover'}"></span>
-               <!-- <object type="image/svg+xml" :data="bugIcon" class="icon">Dragon</object> -->
-              <!-- <img height="30px" width="30px" src="../assets/type-icons/dragon.svg" alt="dark"> -->
-            <!-- </div> -->
+              
           </q-card-section>
 
         </q-card>
