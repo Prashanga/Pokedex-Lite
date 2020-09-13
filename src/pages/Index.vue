@@ -9,9 +9,9 @@
          
           <q-card-section class="bottom-card-section ">
             <div class="text-h6 text-center">{{`#${pokemon.id} ` + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</div>
-            
-              <span class="typeIcon" :style="{mask: `url(icons/${pokemon.types[0].type.name}.svg)`, display: 'inline-block', width: '40px', height: '40px', background: getTypeIconColor(pokemon.types[0].type.name), maskSize: 'cover'}"></span>
-              
+            <div class="row justify-center">
+              <span v-for="type in pokemon.types" :key="type.type.name" class="q-ma-sm" :style="{mask: `url(icons/${type.type.name}.svg)`, display: 'inline-block', width: '40px !important', height: '40px !important', background: getTypeIconColor(type.type.name), maskSize: 'cover'}"></span>
+            </div>
           </q-card-section>
 
         </q-card>
@@ -75,12 +75,4 @@ export default {
     height: 140px;
   }
 
-  /* .typeIcon {
-     mask: var(--maskURL); 
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background: blue;
-    mask-size: cover;
-  } */
 </style>
