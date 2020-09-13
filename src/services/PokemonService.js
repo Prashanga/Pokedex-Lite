@@ -4,7 +4,7 @@ import { Store } from '../store/index'
 export default {
   async getAllPokemons() {
 
-    let response = await axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50')
+    let response = await axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20')
     let tempPokemons = response.data.results
 
     Promise.all(tempPokemons.map(async pokemon => {

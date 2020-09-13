@@ -16,8 +16,5 @@ export const Type_Icon_Colors = Object.freeze({
     ice:'#9EE4D9',
     dragon:'navy',
     dark:'DimGray',
-    fairy: 'HotPink',
-    unknown:'gray',
-    shadow:'MediumPurple'
-
+    fairy: 'HotPink'
   })

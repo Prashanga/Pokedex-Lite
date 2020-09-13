@@ -20,10 +20,7 @@
     </div>
 
     <div v-else>
-
-
       <!-- *************    TODO: ADD LOADING SPINNER **************** -->
-
       <p>Loading............</p>
     </div>
   </q-page>
@@ -57,8 +54,6 @@ export default {
     ...mapState({
       pokemons: state => state.pokemon.pokemons
     }),
-    
- 
   }
 }
 </script>
