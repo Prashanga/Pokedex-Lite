@@ -4,7 +4,7 @@ export const Type_Icon_Colors = Object.freeze({
     water: 'blue',
     normal: 'grey',
     bug: 'orangered',
-    flying: 'magneta',
+    flying: '#5CCCFE',
     fighting: 'khaki',
     poison: '#916db2',
     ground: 'peru',
