@@ -17,7 +17,6 @@
       <router-view />
     </q-page-container>
 
-
   </q-layout>
 </template>
 
@@ -29,7 +28,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

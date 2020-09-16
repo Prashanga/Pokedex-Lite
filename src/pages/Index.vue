@@ -10,12 +10,12 @@
           <q-card-section class="bottom-card-section ">
             <div class="text-h6 text-center">{{`#${pokemon.id} ` + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</div>
             <div class="row justify-center">
-              <span v-for="type in pokemon.types" :key="type.type.name" class="q-ma-sm" :style="{mask: `url(icons/${type.type.name}.svg)`, display: 'inline-block', width: '40px !important', height: '40px !important', background: getTypeIconColor(type.type.name), maskSize: 'cover'}"></span>
+              <span v-for="type in pokemon.types" :key="type.type.name" class="q-ma-sm" :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block', width: '40px !important', height: '40px !important', background: getTypeIconColor(type.type.name), maskSize: 'cover'}"></span>
             </div>
           </q-card-section>
 
         </q-card>
-       
+
       </div>
     </div>
 
@@ -34,12 +34,7 @@ export default {
   name: 'PageIndex',
     data(){
     return {
-      
     }
-  },
-  created() {
-  
-    
   },
   methods:{
     image(id){
