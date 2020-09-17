@@ -41,12 +41,16 @@
 <script>
 import { mapState } from 'vuex'
 import { Type_Icon_Colors } from '../constants'
+import PokemonService from '../services/PokemonService'
 
 export default {
   name: 'PageIndex',
     data(){
     return {
     }
+  },
+  beforeCreate() {
+  PokemonService.getPokemonList(3)
   },
   methods:{
     image(id){

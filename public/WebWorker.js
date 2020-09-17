@@ -1,7 +1,10 @@
+// For large number of GET requests only
+// Not called currently, but might be implemented in the fuyture3
+
 self.addEventListener('message', function(e) {  
   let pokemons
   
-  fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=80')
+  fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=500')
     .then( response => {
       return response.json() //Turn the Response object into a JS object
     })
