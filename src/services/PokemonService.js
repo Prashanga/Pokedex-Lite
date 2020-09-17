@@ -18,14 +18,14 @@ export default {
         tempPokemons.forEach((pokemon, index) => {
           tempPokemons[index] = { ...tempPokemons[index], ...res[index]}
         });
-        Store.dispatch('setPokemons', tempPokemons)
+        Store.dispatch('setPokemons', {page: pageNum, pokemons: tempPokemons})
       })
     
   },
-  async setExtraPokemons(pokemons) {
-    Store.dispatch('setExtraPokemons', pokemons)
+  // async setExtraPokemons(pokemons) {
+  //   Store.dispatch('setExtraPokemons', pokemons)
   
-  }
+  // }
 
   //   let response = await axios.get('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=80')
   //   let tempPokemons = response.data.results

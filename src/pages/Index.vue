@@ -47,10 +47,11 @@ export default {
   name: 'PageIndex',
     data(){
     return {
+      pageNumber: 1
     }
   },
   beforeCreate() {
-  PokemonService.getPokemonList(3)
+  PokemonService.getPokemonList(2)
   },
   methods:{
     image(id){
@@ -63,7 +64,7 @@ export default {
   },
   computed: {
     ...mapState({
-      pokemons: state => state.pokemon.pokemons
+      pokemons: state => state.pokemon.pokemons.pokemons
     }),
   }
 }
