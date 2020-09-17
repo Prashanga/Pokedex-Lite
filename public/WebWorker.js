@@ -1,7 +1,7 @@
 self.addEventListener('message', function(e) {  
   let pokemons
   
-  fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=30')
+  fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=80')
     .then( response => {
       return response.json() //Turn the Response object into a JS object
     })
