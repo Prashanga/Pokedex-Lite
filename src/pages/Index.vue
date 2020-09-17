@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
      
-    <div v-if="pokemons.length" class="q-pa-md row justify-center q-gutter-md">
+    <div v-if="pokemons" class="q-pa-md row justify-center q-gutter-md">
       <div v-for="pokemon in pokemons" :key="pokemon.id">
         <q-card class="my-card">
          
@@ -54,10 +54,6 @@ export default {
   PokemonService.getPokemonList(2)
   },
   methods:{
-    image(id){
-      console.log(id)
-      if(id) return this.pokemons[id-1].sprites.other.dream_world.front_default
-    },
     getTypeIconColor(type){
       return Type_Icon_Colors[type]
     }
