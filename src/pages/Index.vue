@@ -5,7 +5,7 @@
       <div v-for="pokemon in pokemons" :key="pokemon.id">
         <q-card class="my-card">
          
-          <img :alt="pokemon.name" :src="pokemon.sprites.other.dream_world.front_default" class="q-pt-xs card-image">
+          <img :alt="pokemon.name" :src="getImageUrl(pokemon)" class="q-pt-xs card-image">
          
           <q-card-section class="bottom-card-section">
             <div class="pokemon-id">
@@ -29,6 +29,17 @@
         </q-card>
  
       </div>
+
+      <div class="col-12 q-ma-lg flex flex-center">
+        <q-pagination
+          v-model="pageNumber"
+          color="purple"
+          :max="1050/50"
+          :max-pages="6"
+          :boundary-numbers="true"
+        >
+        </q-pagination>
+      </div>
     </div>
 
     <div v-else>
@@ -51,17 +62,26 @@ export default {
     }
   },
   beforeCreate() {
-  PokemonService.getPokemonList(2)
+  PokemonService.getPokemonList(1)
   },
   methods:{
     getTypeIconColor(type){
       return Type_Icon_Colors[type]
+    },
+    getImageUrl(pokemon){
+      //console.log("Image  ", pokemon)
+      return pokemon.sprites.other.dream_world.front_default || pokemon.sprites.front_default || '/imagenotavailable.png'
     }
   },
   computed: {
     ...mapState({
       pokemons: state => state.pokemon.pokemons.pokemons
     }),
+  },
+  watch: {
+    pageNumber() {
+      PokemonService.getPokemonList(this.pageNumber)
+    }
   }
 }
 </script>

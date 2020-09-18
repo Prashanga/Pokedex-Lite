@@ -12,10 +12,7 @@ export default {
     let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`)
     let tempPokemons = response.data.results
     let pokemons = []
-    // let pokemonList = {page: pageNum, pokemons: tempPokemons}
-    // console.log(JSON.stringify(tempPokemons))
-    // localStorage.setItem(`page${pageNum}`, JSON.stringify(tempPokemons))
-    // Store.dispatch('setPokemons',pokemonList )
+    
 
     Promise.all(tempPokemons.map(async pokemon => {
       let res = await axios.get(pokemon.url)
@@ -36,7 +33,6 @@ export default {
         });
 
         let pokemonList = {page: pageNum, pokemons}
-        console.log(JSON.stringify(pokemons))
         localStorage.setItem(`page${pageNum}`, JSON.stringify(pokemonList))
         Store.dispatch('setPokemons',pokemonList )
       })
