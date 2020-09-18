@@ -11,7 +11,7 @@
             <div class="pokemon-id">
               {{`${pokemon.id}`}}
             </div>
-            <div class="text-subtitle-1 text-center q-mt-xs">
+            <div class="text-body-1 text-center">
               {{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}
             </div>
             <div class="row justify-center">
@@ -19,7 +19,7 @@
                 v-for="type in pokemon.types" 
                 :key="type.type.name" 
                 class="q-ma-sm" 
-                :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block', width: '25px', height: '25px', background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
+                :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block', width: '20px', height: '20px', background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
                 :title="type.type.name">
                 
               </span>
@@ -69,7 +69,6 @@ export default {
       return Type_Icon_Colors[type]
     },
     getImageUrl(pokemon){
-      //console.log("Image  ", pokemon)
       return pokemon.sprites.other.dream_world.front_default || pokemon.sprites.front_default || '/imagenotavailable.png'
     }
   },
@@ -89,10 +88,12 @@ export default {
 
 <style >
   .my-card{
-    width: 200px;
+    width: 180px;
+    height: 200px;
   }
    .card-image {
-    height: 150px;
+    height: 110px;
+    max-width:150px;
   }
   .bottom-card-section{
     background-color: #ffffff;
@@ -102,5 +103,6 @@ export default {
     left:8px; 
     bottom: 5px; 
     font-weight: bold;
+    font-size: 0.9rem;
   }
 </style>
