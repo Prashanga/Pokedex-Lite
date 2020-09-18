@@ -37,6 +37,7 @@
           :max="1050/50"
           :max-pages="6"
           :boundary-numbers="true"
+          size="22px"
         >
         </q-pagination>
       </div>
@@ -79,7 +80,17 @@ export default {
   },
   watch: {
     pageNumber() {
-      PokemonService.getPokemonList(this.pageNumber)
+      this.$q.loading.show({
+        message: 'Loading....'
+        })
+      PokemonService
+        .getPokemonList(this.pageNumber)
+        .then(() => {
+          this.$q.loading.hide()
+        })
+        .catch((error) => {
+          this.$q.loading.hide()
+        })
     }
   }
 }
