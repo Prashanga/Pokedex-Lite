@@ -1,0 +1,3 @@
+* Change the font of Pokemon names
+* Change the color of page numbers
+* Dont change page numbe when there's an error

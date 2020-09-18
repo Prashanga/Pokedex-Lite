@@ -70,7 +70,22 @@ export default {
       return Type_Icon_Colors[type]
     },
     getImageUrl(pokemon){
-      return pokemon.sprites.other.dream_world.front_default || pokemon.sprites.front_default || '/imagenotavailable.png'
+      try{
+        return pokemon.sprites.other.dream_world.front_default || pokemon.sprites.front_default || '/imagenotavailable.png'
+      }
+      catch(error){
+        this.showErrorNotif(error.message)
+      }
+    },
+    showErrorNotif(message) {
+      this.$q.notify({
+              message,
+              color: 'negative',
+              avatar: '/abra-256x256.png',
+              actions: [
+                { label: 'Reload', color: 'white', handler: () => { location.reload() } }
+              ]
+            })
     }
   },
   computed: {
@@ -90,6 +105,7 @@ export default {
         })
         .catch((error) => {
           this.$q.loading.hide()
+          this.showErrorNotif(error.message)
         })
     }
   }

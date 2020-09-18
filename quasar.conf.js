@@ -100,7 +100,8 @@ cfg.module.rules.push({
 
       // Quasar plugins
       plugins: [
-        'Loading'
+        'Loading',
+        'Notify'
       ]
     },
 
