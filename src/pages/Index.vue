@@ -37,7 +37,7 @@
           color="purple"
           :max="1050/50"
           :max-pages="6"
-          :boundary-numbers="true"
+          :direction-links="true"
           size="22px"
         >
         </q-pagination>
@@ -74,7 +74,10 @@ export default {
     },
     getImageUrl(pokemon){
       try{
-        return pokemon.sprites.other.dream_world.front_default || pokemon.sprites.front_default || '/imagenotavailable.png'
+        return pokemon.sprites.other.dream_world.front_default || 
+               pokemon.sprites.front_default || 
+               
+               '/imagenotavailable.png'
       }
       catch(error){
         this.showErrorNotif(error.message)
@@ -84,8 +87,11 @@ export default {
     showErrorNotif(message) {
       this.$q.notify({
               message,
-              color: 'negative',
+              color: 'deep-orange-9',
               avatar: '/abra-256x256.png',
+              badgeColor: 'transparent',
+              badgeTextColor: 'transparent',
+               badgeClass: 'shadow-0',
               actions: [
                 { label: 'Reload', color: 'white', handler: () => { location.reload() } }
               ]
@@ -98,7 +104,10 @@ export default {
       PokemonService
         .getPokemonList(this.pageChange)
         .then(() => {
-          this.$q.loading.hide()
+          setTimeout(() => {
+            this.$q.loading.hide()
+          }, 2000)
+          
           this.pageNumber = this.pageChange //Update page number when the component is loaded successfully
         })
         .catch((error) => {
