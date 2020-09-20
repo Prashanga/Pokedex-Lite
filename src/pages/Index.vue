@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
      
-    <div v-if="pokemons" class="q-pa-md row justify-center q-gutter-md">
+    <div v-if="pokemons && !errors" class="q-pa-md row justify-center q-gutter-md">
       <div v-for="pokemon in pokemons" :key="pokemon.id">
         <q-card class="my-card">
          
@@ -32,7 +32,8 @@
 
       <div class="col-12 q-ma-lg flex flex-center">
         <q-pagination
-          v-model="pageNumber"
+          @input = "changePageNumber()"
+          v-model="pageChange"
           color="purple"
           :max="1050/50"
           :max-pages="6"
@@ -43,9 +44,9 @@
       </div>
     </div>
 
-    <div v-else>
+    <div v-if="errors">
       <!-- *************    TODO: ADD LOADING SPINNER **************** -->
-      <p>Loading............</p>
+      <p>Errors.......</p>
     </div>
   </q-page>
 </template>
@@ -59,7 +60,9 @@ export default {
   name: 'PageIndex',
     data(){
     return {
-      pageNumber: 1
+      pageNumber: 1,
+      pageChange: 1,
+      errors: false
     }
   },
   beforeCreate() {
@@ -75,6 +78,7 @@ export default {
       }
       catch(error){
         this.showErrorNotif(error.message)
+        this.errors = true
       }
     },
     showErrorNotif(message) {
@@ -86,6 +90,22 @@ export default {
                 { label: 'Reload', color: 'white', handler: () => { location.reload() } }
               ]
             })
+    },
+    changePageNumber(){
+      this.$q.loading.show({
+        message: 'Loading....'
+        })
+      PokemonService
+        .getPokemonList(this.pageChange)
+        .then(() => {
+          this.$q.loading.hide()
+          this.pageNumber = this.pageChange //Update page number when the component is loaded successfully
+        })
+        .catch((error) => {
+          this.$q.loading.hide()
+          this.showErrorNotif(error.message)
+          this.pageChange = this.pageNumber // Don't change the page number on errors
+        })
     }
   },
   computed: {
@@ -94,20 +114,10 @@ export default {
     }),
   },
   watch: {
-    pageNumber() {
-      this.$q.loading.show({
-        message: 'Loading....'
-        })
-      PokemonService
-        .getPokemonList(this.pageNumber)
-        .then(() => {
-          this.$q.loading.hide()
-        })
-        .catch((error) => {
-          this.$q.loading.hide()
-          this.showErrorNotif(error.message)
-        })
-    }
+    pageChange(){
+      this.changePageNumber()
+    },
+
   }
 }
 </script>
