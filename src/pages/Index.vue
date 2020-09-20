@@ -73,17 +73,10 @@ export default {
       return Type_Icon_Colors[type]
     },
     getImageUrl(pokemon){
-      try{
-        return pokemon.sprites.other.dream_world.front_default || 
-               pokemon.sprites.front_default || 
-               
-               '/imagenotavailable.png'
-      }
-      catch(error){
-        this.showErrorNotif(error.message)
-        this.errors = true
-      }
-    },
+      return pokemon.sprites.dream_world || 
+              pokemon.sprites.front_default || 
+              '/imagenotavailable.png'
+         },
     showErrorNotif(message) {
       this.$q.notify({
               message,

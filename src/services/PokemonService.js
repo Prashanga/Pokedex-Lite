@@ -26,7 +26,10 @@ export default {
           pokemons.push({ 
             name,
             url,
-            sprites: res[index].sprites, 
+            sprites: {
+              front_default: res[index].sprites.front_default,
+              dream_world: res[index].sprites.other.dream_world.front_default
+            }, 
             types: res[index].types,
             id: res[index].id
           })
