@@ -3,7 +3,7 @@
   <q-page class="flex flex-center">
      
     <div v-if="pokemons && !errors" class="q-pa-md row justify-center q-gutter-md">
-      <div v-for="pokemon in pokemons" :key="pokemon.id" class="card-full">
+      <div v-for="pokemon in pokemons" :key="pokemon.id">
         <router-link :to="{name: 'PokemonPage', params: { id: pokemon.id, name: pokemon.name}}" data="pokemon">
      
         <q-card class="my-card">
@@ -132,15 +132,19 @@ export default {
 </script>
 
 
-<style >
+<style scoped>
+  main {
+    background-color: #d6e0f0;
+  }
   .my-card{
+    background-color:#f1f3f8; 
     width: 180px;
     height: 200px;
     z-index: 2;
   }
-   .card-image {
+  .card-image {
     height: 110px;
-    max-width:150px;
+    max-width:180px;
   }
   .bottom-card-section{
     background-color: inherit;
@@ -153,12 +157,17 @@ export default {
     font-size: 0.9rem;
   }
   .my-card:hover {
-    background-color: red;
+    background-color: rgb(165, 168, 182);
     cursor:pointer;
     z-index:1;
+    transform: rotate(2deg);
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -o-transform: rotate(2deg);
   }
 
   a { 
-     text-decoration: none;
-     color: inherit;}
+    text-decoration: none;
+    color: inherit;
+  }
 </style>

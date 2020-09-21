@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <q-header bordered class="bg-purple-9 text-white">
+    <q-header bordered class="text-white navbar">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar size="60px" class="no-margin">
@@ -20,11 +20,8 @@
   </q-layout>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-    }
-  }
-}
-</script>
+<style scoped>
+ .navbar {
+   background-color: #393b44;
+ }
+</style>
