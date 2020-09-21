@@ -1,4 +1,5 @@
 <template>
+
   <q-page class="flex flex-center">
      
     <div v-if="pokemons && !errors" class="q-pa-md row justify-center q-gutter-md">
@@ -53,6 +54,7 @@
       <p>Errors.......</p>
     </div>
   </q-page>
+  
 </template>
 
 <script>

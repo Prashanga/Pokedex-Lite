@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <q-header bordered class="bg-purple-9 text-white" height-hint=" ">
+    <q-header bordered class="bg-purple-9 text-white">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar size="60px" class="no-margin">

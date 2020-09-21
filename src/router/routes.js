@@ -8,14 +8,14 @@ const routes = [
         path: '', 
         name: 'Home',
         component: () => import('pages/Index.vue') 
-      },
-      {
-        path: '/pokemon/:id/:name', 
-        name: 'PokemonPage',
-        component: () => import('pages/PokemonPage.vue'), 
-        props: true
       }
     ]
+  },
+  {
+    path: '/pokemon/:id/:name', 
+    name: 'PokemonPage',
+    component: () => import('pages/PokemonPage.vue'), 
+    props: true
   },
 
   // Always leave this as last one,
