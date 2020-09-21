@@ -39,10 +39,10 @@
           @input = "changePageNumber()"
           v-model="pageChange"
           color="purple"
-          :max="1050/50"
-          :max-pages="6"
+          :max="800/50"
+          :max-pages="5"
           :direction-links="true"
-          size="22px"
+          size="18px"
         >
         </q-pagination>
       </div>
@@ -60,6 +60,7 @@
 import { mapState } from 'vuex'
 import { Type_Icon_Colors } from '../constants'
 import PokemonService from '../services/PokemonService'
+import errorImage from '../assets/abra-256x256.png'
 
 export default {
   name: 'PageIndex',
@@ -68,11 +69,13 @@ export default {
   return {
     pageNumber: 1,
     pageChange: 1,
-    errors: false
+    errors: false,
+    errorImage: null
   }
 },
   beforeCreate() {
   PokemonService.getPokemonList(1)
+  this.errorImage = errorImage
   },
   methods:{
     getTypeIconColor(type){
@@ -87,7 +90,7 @@ export default {
       this.$q.notify({
               message,
               color: 'deep-orange-9',
-              avatar: '/abra-256x256.png',
+              avatar: errorImage,
               badgeColor: 'transparent',
               badgeTextColor: 'transparent',
                badgeClass: 'shadow-0',
@@ -139,31 +142,29 @@ export default {
     background-color:#f1f3f8; 
     width: 160px;
     height: 180px;
-    z-index: 2;
   }
   .card-image {
-    height: 100px;
-    
+    height: 110px;
   }
   .bottom-card-section{
     background-color: inherit;
-    height: 80px;
+    height: 70px;
   }
   .pokemon-id{
     position: absolute;
     left:8px; 
     bottom: 5px; 
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .my-card:hover {
     background-color: rgb(165, 168, 182);
     cursor:pointer;
     z-index:1;
-    transform: rotate(2deg);
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
-    -o-transform: rotate(2deg);
+    transform: rotate(1deg);
+    -webkit-transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
+    -o-transform: rotate(1deg);
   }
 
   a { 
@@ -172,7 +173,8 @@ export default {
   }
 
   .pokemon-name-text{
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+     margin-top: 5px;
   }
   .type-icons {
     width: 20px;
@@ -202,7 +204,8 @@ export default {
       font-size: 0.6rem;
   }
     .pokemon-name-text{
-      font-size: 0.7rem;
+      font-size: 0.9rem;
+     
     }
    .type-icons {
     width: 15px;
