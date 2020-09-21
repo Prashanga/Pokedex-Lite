@@ -4,7 +4,11 @@
      
     <div v-if="pokemons && !errors" class="row justify-center q-gutter-xs q-mt-xs">
       <div v-for="pokemon in pokemons" :key="pokemon.id">
-        <router-link :to="{name: 'PokemonPage', params: { id: pokemon.id, name: pokemon.name}}" data="pokemon">
+        <router-link 
+          :to="{name: 'PokemonPage', 
+          params: { id: pokemon.id, name: pokemon.name}}" 
+          @click.native = "setNavColor(pokemon)"  
+        >
      
         <q-card class="my-card">
           <img :alt="pokemon.name" :src="getImageUrl(pokemon)" class="q-pt-xs q-pb-none q-mb-none card-image">
@@ -85,7 +89,13 @@ export default {
       return pokemon.sprites.dream_world || 
               pokemon.sprites.front_default || 
               '/imagenotavailable.png'
-         },
+    },
+    async setNavColor(pokemon){
+      let color = await this.getTypeIconColor(pokemon.types[0].type.name)
+      this.$nextTick(() => 
+      this.$store.dispatch('setColor',color))
+
+    },
     showErrorNotif(message) {
       this.$q.notify({
               message,
@@ -187,14 +197,14 @@ export default {
   {
     .my-card{
       width: 100px;
-      height: 150px;
+      height: 140px;
     }
     .card-image {
       max-height: 90px;
     }
      .bottom-card-section{
       background-color: inherit;
-      height: 60px;
+      height: 50px;
     }
     .pokemon-id{
       position: absolute;
@@ -204,8 +214,8 @@ export default {
       font-size: 0.6rem;
   }
     .pokemon-name-text{
-      font-size: 0.9rem;
-     
+      font-size: 0.8rem;
+      margin-top: 2px;
     }
    .type-icons {
     width: 15px;

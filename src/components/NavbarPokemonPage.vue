@@ -1,5 +1,5 @@
 <template>
-  <q-header bordered class="bg-red-9 text-white">
+  <q-header bordered class="text-white" :style='{ backgroundColor: color }'>
     <q-toolbar>
       <q-toolbar-title>
         <q-avatar size="60px" class="no-margin">
@@ -12,11 +12,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
+
   name: 'NavbarPokemonPage',
-  data () {
-    return {
-    }
-  }
+  props: ['pokemon'],
+  computed: {
+    ...mapState({
+    color: state => state.navbar.pokemonPageColor
+  }),
+  },
 }
 </script>
+

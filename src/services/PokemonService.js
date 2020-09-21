@@ -41,5 +41,12 @@ export default {
         Store.dispatch('setPokemons',pokemonList )
       })   
   },
+
+  async getSinglePokemon(id) {
+    let response = await axios
+      .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    
+    return response.data
+    }
  
 }

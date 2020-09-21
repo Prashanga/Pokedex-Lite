@@ -14,6 +14,8 @@
 
 <script>
 import NavbarPokemonPage from '../components/NavbarPokemonPage.vue'
+import PokemonService from '../services/PokemonService'
+
 
 export default {
     name: 'PokemonPage',
@@ -22,12 +24,21 @@ export default {
         name: String
     },
     components: { NavbarPokemonPage },
-    computed: {
+    data() {
+      return{
+        pokemon: null
+      }
+    },
+    created() {
+      PokemonService
+        .getSinglePokemon(this.id)
+        .then(res => {
+          console.log(res)
+          this.pokemon = res
+        })
+        .catch( e => console.error(e.message))
+
+    },
  
-    }
 }
 </script>
-
-<style scoped>
-
-</style>
