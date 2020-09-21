@@ -4,7 +4,17 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { 
+        path: '', 
+        name: 'Home',
+        component: () => import('pages/Index.vue') 
+      },
+      {
+        path: '/pokemon/:id/:name', 
+        name: 'PokemonPage',
+        component: () => import('pages/PokemonPage.vue'), 
+        props: true
+      }
     ]
   },
 

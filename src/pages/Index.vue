@@ -2,7 +2,9 @@
   <q-page class="flex flex-center">
      
     <div v-if="pokemons && !errors" class="q-pa-md row justify-center q-gutter-md">
-      <div v-for="pokemon in pokemons" :key="pokemon.id">
+      <div v-for="pokemon in pokemons" :key="pokemon.id" class="card-full">
+        <router-link :to="{name: 'PokemonPage', params: { id: pokemon.id, name: pokemon.name}}" data="pokemon">
+     
         <q-card class="my-card">
          
           <img :alt="pokemon.name" :src="getImageUrl(pokemon)" class="q-pt-xs card-image">
@@ -26,7 +28,9 @@
             </div>
           </q-card-section>
 
+        
         </q-card>
+        </router-link>
  
       </div>
 
@@ -58,13 +62,14 @@ import PokemonService from '../services/PokemonService'
 
 export default {
   name: 'PageIndex',
-    data(){
-    return {
-      pageNumber: 1,
-      pageChange: 1,
-      errors: false
-    }
-  },
+
+  data(){
+  return {
+    pageNumber: 1,
+    pageChange: 1,
+    errors: false
+  }
+},
   beforeCreate() {
   PokemonService.getPokemonList(1)
   },
@@ -129,13 +134,14 @@ export default {
   .my-card{
     width: 180px;
     height: 200px;
+    z-index: 2;
   }
    .card-image {
     height: 110px;
     max-width:150px;
   }
   .bottom-card-section{
-    background-color: #ffffff;
+    background-color: inherit;
   }
   .pokemon-id{
     position: absolute;
@@ -144,4 +150,13 @@ export default {
     font-weight: bold;
     font-size: 0.9rem;
   }
+  .my-card:hover {
+    background-color: red;
+    cursor:pointer;
+    z-index:1;
+  }
+
+  a { 
+     text-decoration: none;
+     color: inherit;}
 </style>
