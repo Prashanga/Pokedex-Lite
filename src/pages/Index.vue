@@ -2,27 +2,26 @@
 
   <q-page class="flex flex-center">
      
-    <div v-if="pokemons && !errors" class="q-pa-md row justify-center q-gutter-md">
+    <div v-if="pokemons && !errors" class="row justify-center q-gutter-xs q-mt-xs">
       <div v-for="pokemon in pokemons" :key="pokemon.id">
         <router-link :to="{name: 'PokemonPage', params: { id: pokemon.id, name: pokemon.name}}" data="pokemon">
      
         <q-card class="my-card">
+          <img :alt="pokemon.name" :src="getImageUrl(pokemon)" class="q-pt-xs q-pb-none q-mb-none card-image">
          
-          <img :alt="pokemon.name" :src="getImageUrl(pokemon)" class="q-pt-xs card-image">
-         
-          <q-card-section class="bottom-card-section">
+          <q-card-section class="bottom-card-section q-pt-sm">
             <div class="pokemon-id">
               {{`${pokemon.id}`}}
             </div>
-            <div class="text-body-1 text-center">
+            <div class="pokemon-name-text text-center">
               {{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}
             </div>
             <div class="row justify-center">
               <span 
                 v-for="type in pokemon.types" 
                 :key="type.type.name" 
-                class="q-ma-sm" 
-                :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block', width: '20px', height: '20px', background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
+                class="q-mx-xs type-icons" 
+                :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block',  background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
                 :title="type.type.name">
                 
               </span>
@@ -138,16 +137,17 @@ export default {
   }
   .my-card{
     background-color:#f1f3f8; 
-    width: 180px;
-    height: 200px;
+    width: 160px;
+    height: 180px;
     z-index: 2;
   }
   .card-image {
-    height: 110px;
-    max-width:180px;
+    height: 100px;
+    
   }
   .bottom-card-section{
     background-color: inherit;
+    height: 80px;
   }
   .pokemon-id{
     position: absolute;
@@ -170,4 +170,44 @@ export default {
     text-decoration: none;
     color: inherit;
   }
+
+  .pokemon-name-text{
+    font-size: 0.8rem;
+  }
+  .type-icons {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 1024px)
+  {
+    .my-card{
+      width: 100px;
+      height: 150px;
+    }
+    .card-image {
+      max-height: 90px;
+    }
+     .bottom-card-section{
+      background-color: inherit;
+      height: 60px;
+    }
+    .pokemon-id{
+      position: absolute;
+      left:2px; 
+      bottom: 2px; 
+      font-weight: bold;
+      font-size: 0.6rem;
+  }
+    .pokemon-name-text{
+      font-size: 0.7rem;
+    }
+   .type-icons {
+    width: 15px;
+    height: 15px;
+  }
+
+}
 </style>
