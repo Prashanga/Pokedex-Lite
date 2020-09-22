@@ -7,7 +7,7 @@
         <router-link 
           :to="{name: 'PokemonPage', 
           params: { id: pokemon.id, name: pokemon.name}}" 
-          @click.native = "setNavColor(pokemon)"  
+          @click.native = "setPokemon(pokemon)"  
         >
      
         <q-card class="my-card">
@@ -90,11 +90,13 @@ export default {
               pokemon.sprites.front_default || 
               '/imagenotavailable.png'
     },
-    async setNavColor(pokemon){
-      let color = await this.getTypeIconColor(pokemon.types[0].type.name)
+    setPokemon(pokemon){
+      let color =  this.getTypeIconColor(pokemon.types[0].type.name)
       this.$nextTick(() => 
-      this.$store.dispatch('setColor',color))
-
+      {
+        this.$store.dispatch('setColor',color)
+        this.$store.dispatch('setPokemon', pokemon)
+      })
     },
     showErrorNotif(message) {
       this.$q.notify({

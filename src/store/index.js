@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as pokemon from './modules/pokemon.js'
-import * as navbar from './modules/navbar.js'
+import * as current from './modules/current.js'
 
 Vue.use(Vuex)
 
@@ -9,7 +9,7 @@ Vue.use(Vuex)
 const Store = new Vuex.Store({
   modules: {
     pokemon,
-    navbar
+    current
   },
 
   // enable strict mode (adds overhead!)

@@ -1,10 +1,12 @@
 <template>
-  <q-header bordered class="text-white" :style='{ backgroundColor: color }'>
+  <q-header bordered class="text-white" >  <!-- :style='{ backgroundColor: color,  }'> -->
     <q-toolbar>
       <q-toolbar-title>
-        <q-avatar size="60px" class="no-margin">
-          <img src="/favicon.svg" >
-        </q-avatar>
+        <a @click="$router.go(-1)">
+          <q-avatar size="60px" class="no-margin">
+            <img src="/favicon.svg" >
+          </q-avatar>
+        </a>
         Pokédex
       </q-toolbar-title>
     </q-toolbar>
@@ -17,7 +19,6 @@ import { mapState } from 'vuex'
 export default {
 
   name: 'NavbarPokemonPage',
-  props: ['pokemon'],
   computed: {
     ...mapState({
     color: state => state.navbar.pokemonPageColor
@@ -26,3 +27,8 @@ export default {
 }
 </script>
 
+<style scoped>
+  .q-header {
+    background: transparent;
+  }
+</style>
