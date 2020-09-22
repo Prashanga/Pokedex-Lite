@@ -1,7 +1,8 @@
 export const state = {
     pokemonPageColor: null,
     pokemon: null,
-    page: 1
+    page: 1,
+    pageChange: 1
 }
   
 export const mutations = {
@@ -14,6 +15,9 @@ export const mutations = {
   SET_PAGE(state, page){ 
     state.page = page
   },
+  SET_PAGECHANGE(state, change){
+    state.pageChange = change
+  }
 }
   
 export const actions = {
@@ -26,5 +30,8 @@ export const actions = {
   setPage({commit}, page){
     commit('SET_PAGE', page)
   },
+  setPageChange({commit}, change) {
+    commit('SET_PAGECHANGE', change)
+  }
 
 }

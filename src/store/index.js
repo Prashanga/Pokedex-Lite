@@ -5,7 +5,6 @@ import * as current from './modules/current.js'
 
 Vue.use(Vuex)
 
-
 const Store = new Vuex.Store({
   modules: {
     pokemon,

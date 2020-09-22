@@ -40,7 +40,7 @@
 
       <div class="col-12 q-ma-lg flex flex-center">
         <q-pagination
-          @input = "changePageNumber()"
+          
           v-model="pageChange"
           color="purple"
           :max="800/50"
@@ -70,17 +70,17 @@ export default {
   name: 'PageIndex',
 
   data(){
-  return {
-    pageNumber: 1,
-    pageChange: 1,
-    errors: false,
-    errorImage: null
-  }
-},
-  beforeCreate() {
-  PokemonService.getPokemonList(1)
+    return {
+      errors: false,
+      errorImage: null
+    }
+  },
+
+  beforeMount() {
+  PokemonService.getPokemonList(this.pageNumber)
   this.errorImage = errorImage
   },
+
   methods:{
     getTypeIconColor(type){
       return Type_Icon_Colors[type]
@@ -93,10 +93,10 @@ export default {
     setPokemon(pokemon){
       let color =  this.getTypeIconColor(pokemon.types[0].type.name)
       this.$nextTick(() => 
-      {
-        this.$store.dispatch('setColor',color)
-        this.$store.dispatch('setPokemon', pokemon)
-      })
+        {
+          this.$store.dispatch('setColor',color)
+          this.$store.dispatch('setPokemon', pokemon)
+        })
     },
     showErrorNotif(message) {
       this.$q.notify({
@@ -111,10 +111,12 @@ export default {
               ]
             })
     },
+ 
     changePageNumber(){
       this.$q.loading.show({
         message: 'Loading....'
-        })
+      })
+
       PokemonService
         .getPokemonList(this.pageChange)
         .then(() => {
@@ -122,7 +124,8 @@ export default {
             this.$q.loading.hide()
           }, 2000)
           
-          this.pageNumber = this.pageChange //Update page number when the component is loaded successfully
+          this.$store.dispatch('setPage', this.pageChange) //Update page number when the component is loaded successfully
+        
         })
         .catch((error) => {
           this.$q.loading.hide()
@@ -131,11 +134,23 @@ export default {
         })
     }
   },
+
   computed: {
     ...mapState({
-      pokemons: state => state.pokemon.pokemons.pokemons
+      pokemons: state => state.pokemon.pokemons.pokemons,
+      pageNumber: state => state.current.page,
+      
     }),
+    pageChange: {
+        get: function() {
+          return this.$store.state.current.pageChange
+        },
+        set: function(value) {
+          this.$store.dispatch('setPageChange', value)
+        },
+      }
   },
+
   watch: {
     pageChange(){
       this.changePageNumber()
