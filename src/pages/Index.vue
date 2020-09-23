@@ -160,12 +160,12 @@ export default {
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
   main {
-    background-color: #d6e0f0;
+    background-color: $primaryBlue;
   }
   .my-card{
-    background-color:#f1f3f8; 
+    background-color: $cardWhite; 
     width: 160px;
     height: 180px;
   }
@@ -184,7 +184,7 @@ export default {
     font-size: 0.8rem;
   }
   .my-card:hover {
-    background-color: rgb(165, 168, 182);
+    background-color: $secondaryBlue;
     cursor:pointer;
     z-index:1;
     transform: rotate(1deg);

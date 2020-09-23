@@ -20,8 +20,8 @@
   </q-layout>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
  .navbar {
-   background-color: #393b44;
+   background-color: $mainNav;
  }
 </style>

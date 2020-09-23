@@ -45,7 +45,6 @@ export default {
       PokemonService
         .getSinglePokemon(this.id)
         .then(res => {
-          console.log(res)
           this.pokemon = res
         })
         .catch( e => console.error(e.message))
@@ -65,11 +64,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  $color: var(--color);
+  // $color: var(--color);
  
-  .q-layout {
-   
-    background: -webkit-linear-gradient(to right,#f1f3f8, 25%, $color); 
-    background: linear-gradient(to right,#f1f3f8, 25%, $color); 
-  }
+  // .q-layout {
+  //   background: -webkit-linear-gradient(to right,#f1f3f8, 25%, $color); 
+  //   background: linear-gradient(to right,#f1f3f8, 25%, $color); 
+  // }
 </style>

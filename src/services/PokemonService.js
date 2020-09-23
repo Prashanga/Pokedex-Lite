@@ -37,7 +37,6 @@ export default {
 
         let pokemonList = {page: pageNum, pokemons}
         localStorage.setItem(`page${pageNum}`, JSON.stringify(pokemonList))
-        console.log(JSON.stringify(pokemonList))
         Store.dispatch('setPokemons',pokemonList )
       })   
   },

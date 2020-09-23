@@ -35,3 +35,9 @@ export const actions = {
   }
 
 }
+
+export const getters = {
+  name: state => {
+      return state.pokemon.name
+    }
+}
