@@ -17,14 +17,14 @@ module.exports = {
   // Rules order is important, please avoid shuffling them
   extends: [
     // Base ESLint recommended rules
-    // 'eslint:recommended',
+    'eslint:recommended',
 
 
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
     // See https://eslint.vuejs.org/rules/#available-rules
-    // 'plugin:vue/essential', // Priority A: Essential (Error Prevention)
-    'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
+     'plugin:vue/essential', // Priority A: Essential (Error Prevention)
+    //'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
     // 'plugin:vue/recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
     // https://github.com/prettier/eslint-config-prettier#installation
@@ -38,7 +38,7 @@ module.exports = {
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-file
     // required to lint *.vue files
     'vue',
-
+    
     // https://github.com/typescript-eslint/typescript-eslint/issues/389#issuecomment-509292674
     // Prettier has not been included as plugin to avoid performance impact
     // add it as an extension for your IDE
@@ -55,8 +55,22 @@ module.exports = {
 
   // add your custom rules here
   rules: {
-    'prefer-promise-reject-errors': 'off',
+  'prefer-promise-reject-errors': 'off',
+  'brace-style': [2, 'stroustrup', { 'allowSingleLine': true }],
 
+  // 'vue/max-attributes-per-line': 0,
+  // 'vue/valid-v-for': 0,
+
+  // allow async-await
+  // 'generator-star-spacing': 'off',
+
+  // allow paren-less arrow functions
+  'arrow-parens': 0,
+  'one-var': 0,
+
+
+  'import/no-unresolved': 0,
+  'import/no-extraneous-dependencies': 0,
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'

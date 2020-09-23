@@ -92,8 +92,7 @@ export default {
     },
     setPokemon(pokemon){
       let color =  this.getTypeIconColor(pokemon.types[0].type.name)
-      this.$nextTick(() => 
-        {
+      this.$nextTick(() => {
           this.$store.dispatch('setColor',color)
           this.$store.dispatch('setPokemon', pokemon)
         })
