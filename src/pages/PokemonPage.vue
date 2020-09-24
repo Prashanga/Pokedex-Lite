@@ -4,20 +4,21 @@
 
     <q-page-container>
     <q-page>
-        <h3>This is pokemon's page {{name }}</h3>
-         <h3>This is pokemon's page {{name }}</h3>
-          <h3>This is pokemon's page {{name }}</h3>
-           <h3>This is pokemon's page {{name }}</h3>
-            <h3>This is pokemon's page {{name }}</h3>
-             <h3>This is pokemon's page {{name }}</h3>
-              <h3>This is pokemon's page {{name }}</h3>
+      <div class="row">
 
-        <p> </p>
-        <p>The id is: {{id}} </p>
-        <p> </p>
-        <p>The id is: {{id}} </p>
-        <p> </p>
-        <p>The id is: {{id}} </p>
+          <div class="fixedColumn col-5">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem similique quos, fugit error dolor voluptatum veritatis ullam nam sint eveniet quaerat eius, maxime praesentium libero omnis nisi eligendi aperiam delectus.
+          </div>
+          <div class="empty col-5"></div>
+          <div class="scrollableColumn col-7">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore ab cumque, inventore maiores eligendi placeat incidunt a distinctio reiciendis? Facere ipsum officiis quis nulla aut rerum ipsam sunt distinctio quasi.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi assumenda, reiciendis tenetur ab necessitatibus odit dolorum! Eius eos excepturi cumque, aliquam incidunt, accusantium est ipsa dolorem architecto officiis laudantium rerum.
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione molestias cupiditate consectetur quibusdam perspiciatis beatae eos, blanditiis saepe numquam iure magni, reiciendis culpa pariatur perferendis modi repudiandae? Placeat, dolor.
+          
+          </div>
+      </div>
+
+     
     </q-page>
     </q-page-container>
   </q-layout>
@@ -64,10 +65,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  // $color: var(--color);
- 
-  // .q-layout {
-  //   background: -webkit-linear-gradient(to right,#f1f3f8, 25%, $color); 
-  //   background: linear-gradient(to right,#f1f3f8, 25%, $color); 
-  // }
+  .fixedColumn {
+    position: fixed;
+    background-color: pink;
+    height: 100vh;    
+  }
+  .scrollableColumn {
+    background-color:gray;
+    height: 190vh;
+  }
+  .empty{
+    height: 1px;
+    background-color: black;
+  }
 </style>

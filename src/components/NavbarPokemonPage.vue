@@ -44,19 +44,21 @@ export default {
 
   .pokemonNameTitle{
     color: $mainNav;
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .backIcon{
     color: black;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     vertical-align: baseline !important;
   }
   .backIcon:hover {
     background-color: black;
     color: white;
   }
-
+  .q-toolbar{
+    height: 75px !important;
+  }
 
 </style>
