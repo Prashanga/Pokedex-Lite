@@ -11,13 +11,18 @@
               <div class="col-12 text-center ">
                 <img :src="getImageUrl(pokemon)" class="mainImage" />
               </div>
-              <div class="highlight-box col-12 q-pt-lg">
-                <p class="text-h4 text-center pokemon-name">
+              <div class="highlight-box col-12">
+                <p class="text-h3 text-center pokemon-name">
                   {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
                 </p>
-                <p class="height-weight">
-                  Height: 22'9" Weight: 190kg
-                </p>
+                <div class="type-chips">
+                  <div class="type-chip text-center">Fire</div>
+                  <div class="type-chip text-center">Flying</div>
+                </div>
+                <p class="height-weight">Height  <i>22'9"</i></p>
+               
+                <p class="height-weight">Weight  <i>190kg</i></p>
+             
               </div>
             </div>
           </div>
@@ -125,7 +130,7 @@ export default {
   .mainImage {
     width: 260px;
     height: 260px;
-    padding-top: 50px;
+    padding-top: 20px;
     margin-left:auto;
   }
   .highlight-box{
@@ -145,7 +150,23 @@ export default {
     // color:$color;
   }
   .height-weight{
-    font-size: 1rem
-    
+    font-size: 1rem;
+    margin: 0 0 8px;
+
+  }
+  .type-chips{
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+    margin-bottom: 15px;
+  }
+  .type-chip {
+    background: $cardWhite;
+    color: $mainNav;
+    border-radius: 8px;
+    margin-left: 15px;
+    font-size: 0.9rem;
+    padding: 2px 8px;
+
   }
 </style>
