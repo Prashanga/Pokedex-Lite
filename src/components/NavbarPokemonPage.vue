@@ -8,7 +8,7 @@
        
         </a>
         <!-- <span class="spacer" ></span > -->
-        <span class="pokemonNameTitle q-ml-xl">{{ name[0].toUpperCase() + name.slice(1) }}</span>
+        <!-- <span class="pokemonNameTitle q-ml-xl">{{ name[0].toUpperCase() + name.slice(1) }}</span> -->
       
       </q-toolbar-title>
       

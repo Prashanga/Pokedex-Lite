@@ -141,13 +141,13 @@ export default {
       
     }),
     pageChange: {
-        get: function() {
-          return this.$store.state.current.pageChange
-        },
-        set: function(value) {
-          this.$store.dispatch('setPageChange', value)
-        },
-      }
+      get: function() {
+        return this.$store.state.current.pageChange
+      },
+      set: function(value) {
+        this.$store.dispatch('setPageChange', value)
+      },
+    }
   },
 
   watch: {
