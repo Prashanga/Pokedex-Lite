@@ -6,33 +6,34 @@
     <q-page>
       <div v-if="pokemon" class="row">
 
-          <div class="col-sm-5 col-xs-12">
-            <div class="row justify-center">
-              <div class="col-12 text-center ">
-                <img :src="getImageUrl(pokemon)" class="mainImage" />
+        <div class="col-sm-5 col-xs-12">
+          <div class="row justify-center">
+            <div class="col-12 text-center ">
+              <img :src="getImageUrl(pokemon)" class="mainImage" />
+            </div>
+
+            <div class="highlight-box col-12">
+              <p class="text-h3 text-center pokemon-name">
+                {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
+              </p>
+
+              <div class="type-chips">
+                <div v-for="type in types" :key="type" class="type-chip text-center">{{type}}</div>
               </div>
-              <div class="highlight-box col-12">
-                <p class="text-h3 text-center pokemon-name">
-                  {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
-                </p>
-                <div class="type-chips">
-                  <div class="type-chip text-center">Fire</div>
-                  <div class="type-chip text-center">Flying</div>
-                </div>
-                <p class="height-weight">Height  <i>22'9"</i></p>
-               
-                <p class="height-weight">Weight  <i>190kg</i></p>
-             
-              </div>
+
+              <p class="height-weight">Height  <i>{{ height }}</i></p>
+              <p class="height-weight">Weight  <i>{{ weight }}</i></p>
+            
             </div>
           </div>
-          <!-- <div class="empty col-5"></div> -->
-          <div class="col-sm-7 col-xs-12">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore ab cumque, inventore maiores eligendi placeat incidunt a distinctio reiciendis? Facere ipsum officiis quis nulla aut rerum ipsam sunt distinctio quasi.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi assumenda, reiciendis tenetur ab necessitatibus odit dolorum! Eius eos excepturi cumque, aliquam incidunt, accusantium est ipsa dolorem architecto officiis laudantium rerum.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione molestias cupiditate consectetur quibusdam perspiciatis beatae eos, blanditiis saepe numquam iure magni, reiciendis culpa pariatur perferendis modi repudiandae? Placeat, dolor.
-          
-          </div>
+        </div>
+      
+        <div class="col-sm-7 col-xs-12 q-pt-lg">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore ab cumque, inventore maiores eligendi placeat incidunt a distinctio reiciendis? Facere ipsum officiis quis nulla aut rerum ipsam sunt distinctio quasi.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi assumenda, reiciendis tenetur ab necessitatibus odit dolorum! Eius eos excepturi cumque, aliquam incidunt, accusantium est ipsa dolorem architecto officiis laudantium rerum.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione molestias cupiditate consectetur quibusdam perspiciatis beatae eos, blanditiis saepe numquam iure magni, reiciendis culpa pariatur perferendis modi repudiandae? Placeat, dolor.
+        
+        </div>
       </div>
 
     </q-page>
@@ -84,8 +85,22 @@ export default {
       return {
         '--color': this.color
       }
-    }       
-  },
+    },
+    types(){
+      return this.pokemon.types.map(type => 
+          type.type.name[0].toUpperCase() + type.type.name.slice(1)
+      )
+    },
+    height(){
+      // Height is received in decimeters ¯\_(ツ)_/¯
+      let heightInInches = this.pokemon.height * 3.937
+      return Math.trunc(heightInInches / 12) + '\'' + ' ' + Math.floor(heightInInches % 12 ) + '"'
+    }, 
+    weight(){
+      return this.pokemon.weight / 10 + ' kg'
+    }
+
+  },  
 
   methods: {
     getImageUrl(){
@@ -116,13 +131,6 @@ export default {
 <style lang="scss" scoped>
   $color: var(--color);
 
-  .fixedColumn {
-    position: fixed;
-    height: 100vh;    
-  }
-  .scrollableColumn {
-    height: 190vh;
-  }
   .empty{
     height: 0px;
     background-color: black;
