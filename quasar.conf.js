@@ -119,9 +119,9 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `Pokedex App`,
-        short_name: `Pokedex App`,
-        description: `Pokedex app for learning Quasar`,
+        name: `Pokedex`,
+        short_name: `Pokedex`,
+        description: `A simple pokedex`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

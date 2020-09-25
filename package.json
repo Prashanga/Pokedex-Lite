@@ -1,8 +1,8 @@
 {
   "name": "pokedex",
   "version": "0.0.1",
-  "description": "Pokedex app for learning Quasar",
-  "productName": "Pokedex App",
+  "description": "A simple pokedex",
+  "productName": "Pokedex",
   "author": "Prashanga <prashanga@gmail.com>",
   "private": true,
   "scripts": {

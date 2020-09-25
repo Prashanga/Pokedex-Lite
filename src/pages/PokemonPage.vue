@@ -69,8 +69,11 @@ export default {
       .getSinglePokemon(this.id)
       .then(res => {
         this.pokemon = res
+        document.title = res.name[0].toUpperCase() + res.name.slice(1) +' - Pokédex'
       })
       .catch( e => console.error(e.message))
+
+    
   },
 
   mounted(){
