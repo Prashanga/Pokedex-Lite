@@ -29,10 +29,9 @@
         </div>
       
         <div class="col-sm-7 col-xs-12 q-pt-lg">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore ab cumque, inventore maiores eligendi placeat incidunt a distinctio reiciendis? Facere ipsum officiis quis nulla aut rerum ipsam sunt distinctio quasi.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi assumenda, reiciendis tenetur ab necessitatibus odit dolorum! Eius eos excepturi cumque, aliquam incidunt, accusantium est ipsa dolorem architecto officiis laudantium rerum.
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione molestias cupiditate consectetur quibusdam perspiciatis beatae eos, blanditiis saepe numquam iure magni, reiciendis culpa pariatur perferendis modi repudiandae? Placeat, dolor.
-        
+          <div class="chart-container" style="position: relative; height:600px; width:600px">
+            <canvas id="statsChart" ref="statsChart" ></canvas>
+          </div>
         </div>
       </div>
 
@@ -47,6 +46,7 @@
 import NavbarPokemonPage from '../components/NavbarPokemonPage.vue'
 import PokemonService from '../services/PokemonService'
 import { mapState } from 'vuex'
+import Chart from 'chart.js'
 
 export default {
   name: 'PokemonPage',
@@ -60,7 +60,17 @@ export default {
 
   data() {
     return{
-      pokemon: null
+      pokemon: null,
+      chartData: {
+        labels: ['HP', 'Attack', 'Defence', 'Sp. Atk', 'Sp. Def', 'Speed'],
+        datasets: [{
+            label: 'Abilities',
+            data: [78, 84, 209, 85, 100, 89],
+            backgroundColor: 'rgba(57, 59, 68, 0.8)', // TODO: Make dynamic acc to type
+            borderWidth: 3,
+            pointRadius: 0.5
+        }]
+      },
     }
   },
 
@@ -72,12 +82,46 @@ export default {
         document.title = res.name[0].toUpperCase() + res.name.slice(1) +' - Pokédex'
       })
       .catch( e => console.error(e.message))
-
-    
   },
 
   mounted(){
     this.isPokemonLoaded()
+    this.$nextTick(function () {
+    
+     setTimeout(() => {
+    
+      new Chart(this.$refs.statsChart, {
+      type: 'radar',
+      data: this.chartData,
+     
+      options: {
+        scale: {
+            angleLines: {
+              lineWidth: 2,
+              display: true
+            },
+            ticks: {
+              min: 0,
+              max: 260,
+              stepSize: 52,
+              fontColor: '#000'
+            },
+             pointLabels: {
+              fontSize: 16,
+              fontColor: '#000'
+            }
+          },
+          legend: {
+           display: false
+          },
+          tooltips:{
+            enabled:false,
+          },
+          
+        }
+       });
+       }, 1000)
+    })
   },
 
   computed: {
@@ -158,7 +202,6 @@ export default {
   }
   .pokemon-name{
     font-style: italic;
-    // color:$color;
   }
   .height-weight{
     font-size: 1rem;
@@ -179,5 +222,9 @@ export default {
     font-size: 0.9rem;
     padding: 2px 8px;
 
+  }
+  #statsChart{
+    height: 100px;
+    width: 100px;
   }
 </style>
