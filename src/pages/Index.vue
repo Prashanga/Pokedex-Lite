@@ -42,8 +42,8 @@
         <q-pagination
           
           v-model="pageChange"
-          color="purple"
-          :max="800/50"
+          color="black"
+           :max="800/50"
           :max-pages="5"
           :direction-links="true"
           size="18px"

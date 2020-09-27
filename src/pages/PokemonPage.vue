@@ -249,8 +249,8 @@ export default {
   }
   .statsChart{
     display: block; 
-    height: 303px !important; 
-    width: 607px !important;
+    height: 379px !important; 
+    width: 759px !important;
   }
 
   @media only screen 
@@ -259,11 +259,11 @@ export default {
   {
     .statsChart{
       display: block; 
-      height: 202px !important; 
-      width: 404px !important;
+      height: 222px !important; 
+      width: 444px !important;
     }
     .chart-container {
-      left:- 20px
+      left: -40px
      }
   }
 
@@ -273,8 +273,8 @@ export default {
   {
     .statsChart{
       display: block; 
-      height: 202px !important; 
-      width: 404px !important;
+      height: 222px !important; 
+      width: 444px !important;
     }
   }
 
