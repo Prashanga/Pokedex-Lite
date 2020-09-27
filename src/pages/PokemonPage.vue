@@ -1,35 +1,34 @@
 <template >
   <q-layout view="lHh Lpr lFf" :style="getColor">
     <NavbarPokemonPage />
-
     <q-page-container>
     <q-page>
-      <div v-if="pokemon" class="row">
+      <div  class="row">
 
         <div class="col-sm-5 col-xs-12">
           <div class="row justify-center">
             <div class="col-12 text-center ">
-              <img :src="getImageUrl(pokemon)" class="mainImage" />
+              <img v-if="pokemon" :src="getImageUrl(pokemon)" class="mainImage" />
             </div>
 
-            <div class="highlight-box col-12">
-              <p class="text-h3 text-center pokemon-name">
+            <div v-if="pokemon" class="highlight-box col-12">
+              <p  class="text-h3 text-center pokemon-name">
                 {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
               </p>
 
-              <div class="type-chips">
+              <div  class="type-chips">
                 <div v-for="type in types" :key="type" class="type-chip text-center">{{type}}</div>
               </div>
 
-              <p class="height-weight">Height  <i>{{ height }}</i></p>
-              <p class="height-weight">Weight  <i>{{ weight }}</i></p>
+              <p  class="height-weight">Height  <i>{{ height }}</i></p>
+              <p  class="height-weight">Weight  <i>{{ weight }}</i></p>
             
             </div>
           </div>
         </div>
       
         <div class="col-sm-7 col-xs-12 q-pt-lg">
-          <div class="chart-container" style="position: relative; height:600px; width:600px">
+          <div class="chart-container no-padding no-margin">
             <canvas id="statsChart" ref="statsChart" ></canvas>
           </div>
         </div>
@@ -62,13 +61,13 @@ export default {
     return{
       pokemon: null,
       chartData: {
-        labels: ['HP', 'Attack', 'Defence', 'Sp. Atk', 'Sp. Def', 'Speed'],
+        labels: ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'],
         datasets: [{
-            label: 'Abilities',
-            data: [78, 84, 209, 85, 100, 89],
-            backgroundColor: 'rgba(57, 59, 68, 0.8)', // TODO: Make dynamic acc to type
-            borderWidth: 3,
-            pointRadius: 0.5
+          label: 'Abilities',
+          data: [78, 84, 209, 85, 100, 89],
+          backgroundColor: 'rgba(57, 59, 68, 0.8)', // TODO: Make dynamic acc to type
+          borderWidth: 3,
+          pointRadius: 0.5
         }]
       },
     }
@@ -80,48 +79,24 @@ export default {
       .then(res => {
         this.pokemon = res
         document.title = res.name[0].toUpperCase() + res.name.slice(1) +' - Pokédex'
+        
       })
-      .catch( e => console.error(e.message))
+      .catch( e => {
+        console.error(e.message)
+        this.$q.loading.hide()
+      })
   },
 
   mounted(){
     this.isPokemonLoaded()
-    this.$nextTick(function () {
     
-     setTimeout(() => {
+    // this.$nextTick(function () {
     
-      new Chart(this.$refs.statsChart, {
-      type: 'radar',
-      data: this.chartData,
-     
-      options: {
-        scale: {
-            angleLines: {
-              lineWidth: 2,
-              display: true
-            },
-            ticks: {
-              min: 0,
-              max: 260,
-              stepSize: 52,
-              fontColor: '#000'
-            },
-             pointLabels: {
-              fontSize: 16,
-              fontColor: '#000'
-            }
-          },
-          legend: {
-           display: false
-          },
-          tooltips:{
-            enabled:false,
-          },
-          
-        }
-       });
-       }, 1000)
-    })
+    //  setTimeout(() => {
+    
+
+    //    }, 1500)
+    // })
   },
 
   computed: {
@@ -162,8 +137,46 @@ export default {
         })
       }
       else{
-         this.$q.loading.hide()
+        this.$q.loading.hide()
+        this.showChart()
       }
+    },
+    showChart() {
+      new Chart(this.$refs.statsChart, {
+        type: 'radar',
+        data: this.chartData,
+      
+        options: {
+          title: {
+            display: true,
+            text: 'Base Stats',
+            fontSize: 18,
+          },
+          scale: {
+            angleLines: {
+              lineWidth: 2,
+              display: true
+            },
+            ticks: {
+              min: 0,
+              max: 260,
+              stepSize: 52,
+              fontColor: '#000'
+            },
+            pointLabels: {
+              fontSize: 13,
+              fontColor: '#000'
+            }
+            },
+            legend: {
+            display: false
+            },
+            tooltips:{
+              enabled:false,
+            },
+            
+          }
+      })
     }
   },
 
@@ -178,6 +191,9 @@ export default {
 <style lang="scss" scoped>
   $color: var(--color);
 
+  .q-page-container {
+    overflow-x: hidden; 
+  }
   .empty{
     height: 0px;
     background-color: black;
@@ -206,7 +222,6 @@ export default {
   .height-weight{
     font-size: 1rem;
     margin: 0 0 8px;
-
   }
   .type-chips{
     display: flex;
@@ -221,10 +236,26 @@ export default {
     margin-left: 15px;
     font-size: 0.9rem;
     padding: 2px 8px;
-
+  }
+  .chart-container {
+    position: relative;
+    height: 600px;
+    width: 600px; 
   }
   #statsChart{
     height: 100px;
     width: 100px;
+  }
+
+    @media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 1024px)
+  {
+    .chart-container {
+      position: relative;
+      left: -65px;
+      height: 450px;
+      width: 500px; 
+    }
   }
 </style>
