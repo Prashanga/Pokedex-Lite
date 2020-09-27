@@ -18,7 +18,7 @@
               {{`${pokemon.id}`}}
             </div>
             <div class="pokemon-name-text text-center">
-              {{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}
+              {{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).split('-')[0] }}
             </div>
             <div class="row justify-center">
               <span 

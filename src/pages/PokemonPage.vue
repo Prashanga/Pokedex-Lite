@@ -3,7 +3,7 @@
     <NavbarPokemonPage />
     <q-page-container>
     <q-page>
-      <div  class="row">
+      <div  class="row justify-center">
 
         <div class="col-sm-5 col-xs-12">
           <div class="row justify-center">
@@ -27,10 +27,8 @@
           </div>
         </div>
       
-        <div class="col-sm-7 col-xs-12 q-pt-lg">
-          <div class="chart-container no-padding no-margin">
-            <canvas id="statsChart" ref="statsChart" ></canvas>
-          </div>
+        <div class="col-sm-7 col-xs-12 q-pt-lg chart-container">
+             <canvas id="statsChart" class="statsChart" ref="statsChart" ></canvas> 
         </div>
       </div>
 
@@ -64,8 +62,8 @@ export default {
         labels: ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'],
         datasets: [{
           label: 'Abilities',
-          data: [78, 84, 209, 85, 100, 89],
-          backgroundColor: 'rgba(57, 59, 68, 0.8)', // TODO: Make dynamic acc to type
+          data: this.baseStats,
+          backgroundColor: 'rgba(57, 59, 68, 0.8)', 
           borderWidth: 3,
           pointRadius: 0.5
         }]
@@ -90,13 +88,6 @@ export default {
   mounted(){
     this.isPokemonLoaded()
     
-    // this.$nextTick(function () {
-    
-    //  setTimeout(() => {
-    
-
-    //    }, 1500)
-    // })
   },
 
   computed: {
@@ -120,6 +111,9 @@ export default {
     }, 
     weight(){
       return this.pokemon.weight / 10 + ' kg'
+    },
+    baseStats(){
+      return this.pokemon.stats.map(stat => stat.base_stat)
     }
 
   },  
@@ -138,13 +132,24 @@ export default {
       }
       else{
         this.$q.loading.hide()
-        this.showChart()
+        this.$nextTick(() => 
+          this.showChart()
+        )
       }
     },
     showChart() {
       new Chart(this.$refs.statsChart, {
         type: 'radar',
-        data: this.chartData,
+        data: {
+          labels: ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'],
+          datasets: [{
+            label: 'Abilities',
+            data: this.baseStats,
+            backgroundColor: 'rgba(57, 59, 68, 0.8)', 
+            borderWidth: 3,
+            pointRadius: 0.5
+          }]
+        },
       
         options: {
           title: {
@@ -161,19 +166,20 @@ export default {
               min: 0,
               max: 260,
               stepSize: 52,
-              fontColor: '#000'
+              fontColor: '#0C0B0A'
             },
             pointLabels: {
               fontSize: 13,
-              fontColor: '#000'
+              fontColor: '#0C0B0A'
             }
-            },
-            legend: {
-            display: false
-            },
-            tooltips:{
-              enabled:false,
-            },
+          },
+          legend: {
+          display: false
+          },
+          tooltips:{
+            enabled:false,
+          },
+          responsive: false
             
           }
       })
@@ -207,8 +213,8 @@ export default {
   .highlight-box{
     background-color: $mainNav;
     margin-top: 15px;
-    width: 300px;
-    height: 200px;
+    width: 360px;
+    height: 210px;
     border-radius: 10% 1%;
     display: flex;
     flex-direction: column;
@@ -239,23 +245,65 @@ export default {
   }
   .chart-container {
     position: relative;
-    height: 600px;
-    width: 600px; 
+    height: 400px;
   }
-  #statsChart{
-    height: 100px;
-    width: 100px;
+  .statsChart{
+    display: block; 
+    height: 303px !important; 
+    width: 607px !important;
   }
 
-    @media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 1024px)
+  @media only screen 
+  and (min-device-width: 300px) 
+  and (max-device-width: 380px)
   {
+    .statsChart{
+      display: block; 
+      height: 202px !important; 
+      width: 404px !important;
+    }
     .chart-container {
-      position: relative;
-      left: -65px;
-      height: 450px;
-      width: 500px; 
+      left:- 20px
+     }
+  }
+
+  @media only screen 
+  and (min-device-width: 380px) 
+  and (max-device-width: 420px)
+  {
+    .statsChart{
+      display: block; 
+      height: 202px !important; 
+      width: 404px !important;
     }
   }
+
+  @media only screen 
+  and (min-device-width: 300px) 
+  and (max-device-width: 599px)
+  {
+    .highlight-box{
+      margin-top: 25px;
+      width: 100vw;
+      border-radius: 0;
+    }
+  }
+
+  @media only screen 
+  and (min-device-width: 420px) 
+  and (max-device-width: 1024px)
+  {
+    .statsChart{
+      display: block; 
+      height: 253px !important; 
+      width: 506px !important;
+    }
+    .highlight-box{
+      margin-top: 25px;
+      // width: 100vw;
+      // border-radius: 0;
+    }
+  }
+
+
 </style>
