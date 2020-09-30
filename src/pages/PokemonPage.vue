@@ -4,7 +4,6 @@
     <q-page-container>
     <q-page>
       <div  class="row justify-center">
-
         <div class="col-sm-5 col-xs-12">
           <div class="row justify-center">
             <div class="col-12 text-center ">
@@ -28,7 +27,7 @@
         </div>
       
         <div class="col-sm-7 col-xs-12 q-pt-lg chart-container">
-             <canvas id="statsChart" class="statsChart" ref="statsChart" ></canvas> 
+          <canvas id="statsChart" class="statsChart" ref="statsChart" ></canvas> 
         </div>
       </div>
 
@@ -47,10 +46,9 @@ import Chart from 'chart.js'
 
 export default {
   name: 'PokemonPage',
-
   props: {
-      id: Number,
-      name: String
+    id: Number,
+    name: String
   },
 
   components: { NavbarPokemonPage },
@@ -82,17 +80,17 @@ export default {
       .catch( e => {
         console.error(e.message)
         this.$q.loading.hide()
+        this.showErrorNotif(e.message)
       })
   },
 
   mounted(){
     this.isPokemonLoaded()
-    
   },
 
   computed: {
     ...mapState({
-        color: state => state.current.pokemonPageColor
+      color: state => state.current.pokemonPageColor
     }),
     getColor() {
       return {
@@ -101,7 +99,7 @@ export default {
     },
     types(){
       return this.pokemon.types.map(type => 
-          type.type.name[0].toUpperCase() + type.type.name.slice(1)
+        type.type.name[0].toUpperCase() + type.type.name.slice(1)
       )
     },
     height(){
@@ -115,7 +113,6 @@ export default {
     baseStats(){
       return this.pokemon.stats.map(stat => stat.base_stat)
     }
-
   },  
 
   methods: {
@@ -136,6 +133,19 @@ export default {
           this.showChart()
         )
       }
+    },
+    showErrorNotif(message) {
+      this.$q.notify({
+        message,
+        color: 'deep-orange-9',
+        icon: 'warning',
+        badgeColor: 'transparent',
+        badgeTextColor: 'transparent',
+          badgeClass: 'shadow-0',
+        actions: [
+          { label: 'Reload', color: 'white', handler: () => { location.reload() } }
+        ]
+      })
     },
     showChart() {
       new Chart(this.$refs.statsChart, {
@@ -264,7 +274,7 @@ export default {
     }
     .chart-container {
       left: -40px
-     }
+    }
   }
 
   @media only screen 
@@ -304,6 +314,4 @@ export default {
       // border-radius: 0;
     }
   }
-
-
 </style>

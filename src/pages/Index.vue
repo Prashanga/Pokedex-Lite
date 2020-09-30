@@ -30,12 +30,9 @@
                 
               </span>
             </div>
-          </q-card-section>
-
-        
+          </q-card-section>  
         </q-card>
         </router-link>
- 
       </div>
 
       <div class="col-12 q-ma-lg flex flex-center">
@@ -52,10 +49,13 @@
       </div>
     </div>
 
-    <div v-if="errors">
-      <!-- *************    TODO: ADD LOADING SPINNER **************** -->
+    <!-- <div v-if="errors">
+       *************    TODO: ADD LOADING SPINNER **************** 
       <p>Errors.......</p>
-    </div>
+    </div> -->
+    <q-inner-loading :showing="pageFirstLoadSpinner" class="initialLoader">
+      <q-spinner-ball size="58px" color="black" />
+    </q-inner-loading>
   </q-page>
   
 </template>
@@ -64,21 +64,26 @@
 import { mapState } from 'vuex'
 import { Type_Icon_Colors } from '../constants'
 import PokemonService from '../services/PokemonService'
-import errorImage from '../assets/abra-256x256.png'
 
 export default {
   name: 'PageIndex',
 
   data(){
     return {
-      errors: false,
-      errorImage: null
+     pageFirstLoadSpinner: true,
+     errorImage: null,
+     errors: false
     }
   },
 
   beforeMount() {
-  PokemonService.getPokemonList(this.pageNumber)
-  this.errorImage = errorImage
+    PokemonService
+      .getPokemonList(this.pageNumber)
+      .then(() => this.pageFirstLoadSpinner = false)
+      .catch((err) => {
+        this.pageFirstLoadSpinner = false
+        this.showErrorNotif(err.message)
+      })
   },
 
   methods:{
@@ -87,28 +92,28 @@ export default {
     },
     getImageUrl(pokemon){
       return pokemon.sprites.dream_world || 
-              pokemon.sprites.front_default || 
-              '/imagenotavailable.png'
+          pokemon.sprites.front_default || 
+          '/imagenotavailable.png'
     },
     setPokemon(pokemon){
       let color =  this.getTypeIconColor(pokemon.types[0].type.name)
       this.$nextTick(() => {
-          this.$store.dispatch('setColor',color)
-          this.$store.dispatch('setPokemon', pokemon)
-        })
+        this.$store.dispatch('setColor',color)
+        this.$store.dispatch('setPokemon', pokemon)
+      })
     },
     showErrorNotif(message) {
       this.$q.notify({
-              message,
-              color: 'deep-orange-9',
-              avatar: errorImage,
-              badgeColor: 'transparent',
-              badgeTextColor: 'transparent',
-               badgeClass: 'shadow-0',
-              actions: [
-                { label: 'Reload', color: 'white', handler: () => { location.reload() } }
-              ]
-            })
+        message,
+        color: 'deep-orange-9',
+        icon: 'warning',
+        badgeColor: 'transparent',
+        badgeTextColor: 'transparent',
+          badgeClass: 'shadow-0',
+        actions: [
+          { label: 'Reload', color: 'white', handler: () => { location.reload() } }
+        ]
+      })
     },
  
     changePageNumber(){
@@ -122,9 +127,7 @@ export default {
           setTimeout(() => {
             this.$q.loading.hide()
           }, 2000)
-          
           this.$store.dispatch('setPage', this.pageChange) //Update page number when the component is loaded successfully
-        
         })
         .catch((error) => {
           this.$q.loading.hide()
@@ -154,7 +157,6 @@ export default {
     pageChange(){
       this.changePageNumber()
     },
-
   }
 }
 </script>
@@ -206,7 +208,7 @@ export default {
     width: 20px;
     height: 20px;
   }
-
+  
   @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 1024px)
