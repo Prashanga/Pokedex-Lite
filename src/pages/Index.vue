@@ -35,7 +35,7 @@
         </router-link>
       </div>
 
-      <div class="col-12 q-ma-lg flex flex-center">
+      <div class="col-12 q-ma-lg flex flex-center pagination">
         <q-pagination
           
           v-model="pageChange"
@@ -49,10 +49,23 @@
       </div>
     </div>
 
-    <!-- <div v-if="errors">
-       *************    TODO: ADD LOADING SPINNER **************** 
-      <p>Errors.......</p>
-    </div> -->
+    <q-input 
+      label-color="grey-1" 
+      dark 
+      filled 
+      class="search" 
+      v-model="searchInput" 
+      label="Search" 
+    >
+     
+      <template v-if="searchInput.length" v-slot:append>
+        <q-icon name="close" @click="searchInput = ''" class="cursor-pointer" />
+      </template>
+       <template v-else v-slot:append>
+        <q-icon name="search" />
+      </template>
+    </q-input>
+
     <q-inner-loading :showing="pageFirstLoadSpinner" class="initialLoader">
       <q-spinner-ball size="58px" color="black" />
     </q-inner-loading>
@@ -72,7 +85,8 @@ export default {
     return {
      pageFirstLoadSpinner: true,
      errorImage: null,
-     errors: false
+     errors: false,
+     searchInput: ''
     }
   },
 
@@ -194,12 +208,10 @@ export default {
     -moz-transform: rotate(1deg);
     -o-transform: rotate(1deg);
   }
-
   a { 
     text-decoration: none;
     color: inherit;
   }
-
   .pokemon-name-text{
     font-size: 0.9rem;
      margin-top: 5px;
@@ -207,6 +219,23 @@ export default {
   .type-icons {
     width: 20px;
     height: 20px;
+  }
+  .search{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    background-color: $mainNav;
+    text-decoration: none;
+    height: 55px;
+  }
+  .search:focus{
+    background-color: $mainNav;
+  }
+  .pagination{
+    margin-bottom: 75px;
+  }
+  .q-field__control{
+    color: $mainNav !important;
   }
   
   @media only screen 
@@ -230,7 +259,7 @@ export default {
       bottom: 2px; 
       font-weight: bold;
       font-size: 0.6rem;
-  }
+    }
     .pokemon-name-text{
       font-size: 0.8rem;
       margin-top: 2px;
@@ -238,7 +267,10 @@ export default {
    .type-icons {
     width: 15px;
     height: 15px;
+    }
+    .search{
+      width: 100vw;
+    
+    }
   }
-
-}
 </style>
