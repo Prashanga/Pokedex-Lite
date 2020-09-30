@@ -1,17 +1,13 @@
 <template>
   <q-header bordered class="text-white " >
     <q-toolbar >
-      
       <q-toolbar-title >
         <a @click="$router.go(-1)" class="no-margin no-padding">
           <q-icon name="fas fa-times" class="backIcon no-margin no-padding" /> 
-       
+          
         </a>
-        <!-- <span class="spacer" ></span > -->
-        <!-- <span class="pokemonNameTitle q-ml-xl">{{ name[0].toUpperCase() + name.slice(1) }}</span> -->
-      
       </q-toolbar-title>
-      
+        
     </q-toolbar>
   </q-header>
 </template>
@@ -41,12 +37,10 @@ export default {
     background: -webkit-linear-gradient(to right,#f1f3f8, 25%, $color); 
     background: linear-gradient(to right,#f1f3f8, 25%, $color); 
   }
-
   .pokemonNameTitle{
     color: $mainNav;
     font-size: 2rem;
   }
-
   .backIcon{
     color: black;
     cursor: pointer;
@@ -57,6 +51,7 @@ export default {
     background-color: black;
     color: white;
   }
+
   .q-toolbar{
     height: 75px !important;
   }
