@@ -1,6 +1,0 @@
-* -----------> Change the font of Pokemon names
-* ------------> Change the color of page numbers
-*-------------> Dont change page numbe when there's an error
-
-*---> cHANGE COLOR OF POkemonpagenav to null when router from = "/pokemonPage"
-* add github and linkedin to the navbar

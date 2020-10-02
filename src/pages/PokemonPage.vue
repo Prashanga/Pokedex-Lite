@@ -40,7 +40,6 @@
 
 
 <script>
-/* eslint-disable vue/require-default-prop */
 import NavbarPokemonPage from '../components/NavbarPokemonPage.vue'
 import PokemonService from '../services/PokemonService'
 import { mapState } from 'vuex'
@@ -57,17 +56,7 @@ export default {
 
   data() {
     return{
-      pokemon: null,
-      chartData: {
-        labels: ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'],
-        datasets: [{
-          label: 'Abilities',
-          data: this.baseStats,
-          backgroundColor: 'rgba(57, 59, 68, 0.8)', 
-          borderWidth: 3,
-          pointRadius: 0.5
-        }]
-      },
+      pokemon: null
     }
   },
 
@@ -80,7 +69,6 @@ export default {
         
       })
       .catch( e => {
-        console.error(e.message)
         this.$q.loading.hide()
         this.showErrorNotif(e.message)
       })
@@ -143,10 +131,7 @@ export default {
         icon: 'warning',
         badgeColor: 'transparent',
         badgeTextColor: 'transparent',
-          badgeClass: 'shadow-0',
-        actions: [
-          { label: 'Reload', color: 'white', handler: () => { location.reload() } }
-        ]
+        badgeClass: 'shadow-0',
       })
     },
     showChart() {
@@ -192,7 +177,6 @@ export default {
             enabled:false,
           },
           responsive: false
-            
           }
       })
     }

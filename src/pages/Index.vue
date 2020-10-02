@@ -22,7 +22,7 @@
               {{`${pokemon.id}`}}
             </div>
             <div class="pokemon-name-text text-center">
-              {{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).split('-')[0] }}
+              {{ pokemonCardName(pokemon.name) }}
             </div>
             <div class="row justify-center">
               <span 
@@ -69,7 +69,7 @@
               {{`${pokemon.id}`}}
             </div>
             <div class="pokemon-name-text text-center">
-              {{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).split('-')[0] }}
+              {{ pokemonCardName(pokemon.name) }}
             </div>
             <div class="row justify-center">
               <span 
@@ -153,6 +153,15 @@ export default {
         this.$store.dispatch('setPokemon', pokemon)
       })
     },
+    pokemonCardName(name){
+      const names = ['ho-oh']
+      if(names.includes(name.toLowerCase()) ) {
+        return name.charAt(0).toUpperCase() + name.slice(1)
+      }
+      else {
+        return name.charAt(0).toUpperCase() + name.slice(1).split('-')[0]
+      }
+    },
     showErrorNotif(message) {
       this.$q.notify({
         message,
@@ -203,10 +212,7 @@ export default {
   main {
     background-color: $primaryBlue;
   }
-  .q-list {
-    display: inline !important;
-  }
-  .my-card{
+  .my-card {
     background-color: $cardWhite; 
     width: 160px;
     height: 180px;
@@ -214,11 +220,11 @@ export default {
   .card-image {
     height: 110px;
   }
-  .bottom-card-section{
+  .bottom-card-section {
     background-color: inherit;
     height: 70px;
   }
-  .pokemon-id{
+  .pokemon-id {
     position: absolute;
     left:8px; 
     bottom: 5px; 
@@ -238,15 +244,15 @@ export default {
     text-decoration: none;
     color: inherit;
   }
-  .pokemon-name-text{
+  .pokemon-name-text  {
     font-size: 0.9rem;
-     margin-top: 5px;
+    margin-top: 5px;
   }
   .type-icons {
     width: 20px;
     height: 20px;
   }
-  .search{
+  .search {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -254,10 +260,10 @@ export default {
     text-decoration: none;
     height: 55px;
   }
-  .search:focus{
+  .search:focus {
     background-color: $mainNav;
   }
-  .pagination{
+  .pagination {
     margin-bottom: 75px;
   }
   .q-field__control{
@@ -268,7 +274,7 @@ export default {
   and (min-device-width: 320px) 
   and (max-device-width: 1024px)
   {
-    .my-card{
+    .my-card {
       width: 100px;
       height: 140px;
     }
@@ -279,22 +285,22 @@ export default {
       background-color: inherit;
       height: 50px;
     }
-    .pokemon-id{
+    .pokemon-id {
       position: absolute;
       left:2px; 
       bottom: 2px; 
       font-weight: bold;
       font-size: 0.6rem;
     }
-    .pokemon-name-text{
+    .pokemon-name-text {
       font-size: 0.8rem;
       margin-top: 2px;
     }
    .type-icons {
-    width: 15px;
-    height: 15px;
+      width: 15px;
+      height: 15px;
     }
-    .search{
+    .search {
       width: 100vw;
     }
   }
