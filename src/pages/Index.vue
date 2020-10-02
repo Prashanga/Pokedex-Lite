@@ -1,4 +1,9 @@
 <template>
+<div>
+ <q-layout view="hHh lpR fFf">
+   <Navbar />
+  <q-page-container>
+
   <q-page class="flex flex-center">
    <q-infinite-scroll v-show="searchInput.length < 1" @load="onLoad" class="q-mb-xl">
     <div class="row justify-center q-gutter-xs q-mt-xs">
@@ -33,12 +38,12 @@
         </q-card>
         </router-link>
       </div>
-
     </div>
+    
     <template v-slot:loading>
-        <div class="row justify-center q-my-md">
-          <q-spinner-dots color="black" size="40px" />
-        </div>
+      <div class="row justify-center q-my-md">
+        <q-spinner-dots color="black" size="40px" />
+      </div>
     </template>
    </q-infinite-scroll>
 
@@ -53,7 +58,11 @@
         >
      
         <q-card class="my-card">
-          <img :alt="pokemon.name" :src="getImageUrl(pokemon)" class="q-pt-xs q-pb-none q-mb-none card-image">
+          <img 
+            :alt="pokemon.name" 
+            :src="getImageUrl(pokemon)" 
+            class="q-pt-xs q-pb-none q-mb-none card-image"
+          >
          
           <q-card-section class="bottom-card-section q-pt-sm">
             <div class="pokemon-id">
@@ -98,17 +107,20 @@
       <q-spinner-ball size="58px" color="black" />
     </q-inner-loading>
   </q-page>
-  
+  </q-page-container>
+  </q-layout>
+</div>
 </template>
 
 <script>
 
-import { Type_Icon_Colors } from '../constants'
+import { Type_Icon_Colors } from '../utils/constants'
 import allPokemons from '../utils/allPokemons.js'
+import Navbar from 'components/Navbar.vue'
 
 export default {
   name: 'PageIndex',
-
+  components: { Navbar },
   data(){
     return {
      pageFirstLoadSpinner: false,
@@ -175,7 +187,6 @@ export default {
         let foundPokemons = allPokemons.filter(pokemon => 
           pokemon.name.includes(this.searchInput.toLowerCase())
         )
-        //if(foundPokemons.length < 10) 
         this.searchPokemons = foundPokemons
         if(foundPokemons.length === 0) this.showErrorNotif('No match found')
       }
@@ -285,7 +296,6 @@ export default {
     }
     .search{
       width: 100vw;
-    
     }
   }
 </style>

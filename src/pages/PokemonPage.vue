@@ -16,12 +16,14 @@
               </p>
 
               <div  class="type-chips">
-                <div v-for="type in types" :key="type" class="type-chip text-center">{{type}}</div>
+                <div v-for="type in types" 
+                  :key="type" 
+                  class="type-chip text-center">
+                  {{type}}
+                </div>
               </div>
-
               <p  class="height-weight">Height  <i>{{ height }}</i></p>
               <p  class="height-weight">Weight  <i>{{ weight }}</i></p>
-            
             </div>
           </div>
         </div>

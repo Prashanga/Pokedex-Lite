@@ -1,25 +1,18 @@
 
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { 
-        path: '', 
-        name: 'Home',
-        component: () => import('pages/Index.vue') ,
-        meta: {
-          title: 'Pokédex',
-          metaTags: [
-            {
-              name: 'description',
-              content: 'A simple Pokédex'
-            }
-          ]
-        },
-      }
-    ],
-    
+    path: '/', 
+    name: 'Home',
+    component: () => import('pages/Index.vue') ,
+    meta: {
+      title: 'Pokédex',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'A simple Pokédex'
+        }
+      ]
+    },
   },
   {
     path: '/pokemon/:id/:name', 
@@ -27,7 +20,7 @@ const routes = [
     component: () => import('pages/PokemonPage.vue'), 
     props: true,
     meta: {
-          title: 'Pokédex',
+      title: 'Pokédex',
     }
   },
 

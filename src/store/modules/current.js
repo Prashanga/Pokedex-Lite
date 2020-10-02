@@ -1,8 +1,6 @@
 export const state = {
     pokemonPageColor: null,
-    pokemon: null,
-    page: 1,
-    pageChange: 1
+    pokemon: null
 }
   
 export const mutations = {
@@ -11,12 +9,6 @@ export const mutations = {
   },
   SET_POKEMON(state, pokemon){ 
     state.pokemon = pokemon
-  },
-  SET_PAGE(state, page){ 
-    state.page = page
-  },
-  SET_PAGECHANGE(state, change){
-    state.pageChange = change
   }
 }
   
@@ -26,18 +18,11 @@ export const actions = {
   },
   setPokemon({commit}, pokemon){
   commit('SET_POKEMON', pokemon)
-  },
-  setPage({commit}, page){
-    commit('SET_PAGE', page)
-  },
-  setPageChange({commit}, change) {
-    commit('SET_PAGECHANGE', change)
   }
-
 }
 
 export const getters = {
   name: state => {
-      return state.pokemon.name
-    }
+    return state.pokemon.name
+  }
 }

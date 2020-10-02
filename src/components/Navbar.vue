@@ -1,27 +1,20 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header bordered class="text-white navbar">
-      <q-toolbar>
-        <q-avatar size="60px" >
-          <img src="/favicon.svg" >
-        </q-avatar>
-        <q-toolbar-title class="title">
-          Pokédex
-        </q-toolbar-title>
-        <a href="https://github.com/Prashanga" target="blank" class="q-mr-sm no-padding">
-          <q-icon name="fab fa-github" class="profileIcons q-mr-sm no-padding" /> 
-        </a>
-        <a href="https://www.linkedin.com/in/prashanga-dhakal-0a4677a6/" target="blank" class="no-margin no-padding">
-          <q-icon name="fab fa-linkedin" class="profileIcons q-mr-lg no-padding" /> 
-        </a>
-      </q-toolbar>
-    </q-header>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-
-  </q-layout>
+  <q-header bordered class="text-white navbar">
+    <q-toolbar>
+      <q-avatar size="60px" >
+        <img src="/favicon.svg" >
+      </q-avatar>
+      <q-toolbar-title class="title">
+        Pokédex
+      </q-toolbar-title>
+      <a href="https://github.com/Prashanga" target="blank" class="q-mr-sm no-padding">
+        <q-icon name="fab fa-github" class="profileIcons q-mr-sm no-padding" /> 
+      </a>
+      <a href="https://www.linkedin.com/in/prashanga-dhakal-0a4677a6/" target="blank" class="no-margin no-padding">
+        <q-icon name="fab fa-linkedin" class="profileIcons q-mr-lg no-padding" /> 
+      </a>
+    </q-toolbar>
+  </q-header>
 </template>
 
 <style lang="scss" scoped>

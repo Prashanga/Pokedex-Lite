@@ -3,8 +3,7 @@
     <q-toolbar >
       <q-toolbar-title >
         <a @click="$router.go(-1)" class="no-margin no-padding">
-          <q-icon name="fas fa-times" class="backIcon no-margin no-padding" /> 
-          
+          <q-icon name="fas fa-times" class="backIcon no-margin no-padding" />
         </a>
       </q-toolbar-title>
         
@@ -51,7 +50,6 @@ export default {
     background-color: black;
     color: white;
   }
-
   .q-toolbar{
     height: 75px !important;
   }
