@@ -18,3 +18,5 @@ export const Type_Icon_Colors = Object.freeze({
     dark:'DimGray',
     fairy: 'HotPink'
   })
+
+  export const InfScrollSize = 50

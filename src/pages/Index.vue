@@ -113,10 +113,10 @@
 </template>
 
 <script>
-
-import { Type_Icon_Colors } from '../utils/constants'
+import { Type_Icon_Colors, InfScrollSize } from '../utils/constants'
 import allPokemons from '../utils/allPokemons.js'
 import Navbar from 'components/Navbar.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'PageIndex',
@@ -124,17 +124,16 @@ export default {
   data(){
     return {
      pageFirstLoadSpinner: false,
-     errors: false,
      searchInput: '',
      allPokemons: Object.freeze(allPokemons),
      pokemons: null,
      searchPokemons: null,
-     infScrollSize: 50
+     infScrollSize: InfScrollSize
     }
   },
 
-  created() {
-    this.pokemons = this.allPokemons.slice(0,50)
+  beforeMount() {
+    this.pokemons = this.allPokemons.slice(0,this.totalPokemonsLoaded)
   },
 
   methods:{
@@ -181,6 +180,7 @@ export default {
             this.pokemons.length,this.pokemons.length + this.infScrollSize 
           )
           this.pokemons = [...this.pokemons, ...additionalPokemons]
+          this.$store.dispatch('setPokemonLoaded', this.pokemons.length)
           done()
         }, 800)  
       }
@@ -203,6 +203,11 @@ export default {
         this.searchPokemons = null
       }
     },
+  },
+  computed: {
+    ...mapState({
+      totalPokemonsLoaded: state => state.current.pokemonsLoaded
+    }),
   }
 }
 </script>
