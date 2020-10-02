@@ -14,7 +14,8 @@
     "axios": "^0.18.1",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
-    "quasar": "^1.0.0"
+    "quasar": "^1.0.0",
+    "vue-observe-visibility": "^0.4.6"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",

@@ -1,8 +1,7 @@
 <template>
-
   <q-page class="flex flex-center">
-     
-    <div v-if="pokemons && !errors" class="row justify-center q-gutter-xs q-mt-xs">
+   <q-infinite-scroll v-show="searchInput.length < 1" @load="onLoad" class="q-mb-xl">
+    <div class="row justify-center q-gutter-xs q-mt-xs">
       <div v-for="pokemon in pokemons" :key="pokemon.id">
         <router-link 
           :to="{name: 'PokemonPage', 
@@ -35,20 +34,50 @@
         </router-link>
       </div>
 
-      <div class="col-12 q-ma-lg flex flex-center pagination">
-        <q-pagination
-          
-          v-model="pageChange"
-          color="black"
-           :max="800/50"
-          :max-pages="5"
-          :direction-links="true"
-          size="18px"
+    </div>
+    <template v-slot:loading>
+        <div class="row justify-center q-my-md">
+          <q-spinner-dots color="black" size="40px" />
+        </div>
+    </template>
+   </q-infinite-scroll>
+
+      <!--        Div for Search pokemons      -->
+
+    <div v-if="searchInput.length >= 1" class="row justify-center q-gutter-xs q-mt-xs">
+      <div v-for="pokemon in searchPokemons" :key="pokemon.id">
+        <router-link 
+          :to="{name: 'PokemonPage', 
+          params: { id: pokemon.id, name: pokemon.name}}" 
+          @click.native = "setPokemon(pokemon)"  
         >
-        </q-pagination>
+     
+        <q-card class="my-card">
+          <img :alt="pokemon.name" :src="getImageUrl(pokemon)" class="q-pt-xs q-pb-none q-mb-none card-image">
+         
+          <q-card-section class="bottom-card-section q-pt-sm">
+            <div class="pokemon-id">
+              {{`${pokemon.id}`}}
+            </div>
+            <div class="pokemon-name-text text-center">
+              {{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).split('-')[0] }}
+            </div>
+            <div class="row justify-center">
+              <span 
+                v-for="type in pokemon.types" 
+                :key="type.type.name" 
+                class="q-mx-xs type-icons" 
+                :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block',  background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
+                :title="type.type.name">
+                
+              </span>
+            </div>
+          </q-card-section>  
+        </q-card>
+        </router-link>
       </div>
     </div>
-
+    
     <q-input 
       label-color="grey-1" 
       dark 
@@ -57,11 +86,10 @@
       v-model="searchInput" 
       label="Search" 
     >
-     
       <template v-if="searchInput.length" v-slot:append>
         <q-icon name="close" @click="searchInput = ''" class="cursor-pointer" />
       </template>
-       <template v-else v-slot:append>
+      <template v-else v-slot:append>
         <q-icon name="search" />
       </template>
     </q-input>
@@ -74,30 +102,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+
 import { Type_Icon_Colors } from '../constants'
-import PokemonService from '../services/PokemonService'
+import allPokemons from '../utils/allPokemons.js'
 
 export default {
   name: 'PageIndex',
 
   data(){
     return {
-     pageFirstLoadSpinner: true,
-     errorImage: null,
+     pageFirstLoadSpinner: false,
      errors: false,
-     searchInput: ''
+     searchInput: '',
+     allPokemons: Object.freeze(allPokemons),
+     pokemons: null,
+     searchPokemons: null,
+     infScrollSize: 50
     }
   },
 
-  beforeMount() {
-    PokemonService
-      .getPokemonList(this.pageNumber)
-      .then(() => this.pageFirstLoadSpinner = false)
-      .catch((err) => {
-        this.pageFirstLoadSpinner = false
-        this.showErrorNotif(err.message)
-      })
+  created() {
+    this.pokemons = this.allPokemons.slice(0,50)
   },
 
   methods:{
@@ -123,53 +148,40 @@ export default {
         icon: 'warning',
         badgeColor: 'transparent',
         badgeTextColor: 'transparent',
-          badgeClass: 'shadow-0',
-        actions: [
-          { label: 'Reload', color: 'white', handler: () => { location.reload() } }
-        ]
+        badgeClass: 'shadow-0',
+        timeout: 1000
       })
     },
- 
-    changePageNumber(){
-      this.$q.loading.show({
-        message: 'Loading....'
-      })
-
-      PokemonService
-        .getPokemonList(this.pageChange)
-        .then(() => {
-          setTimeout(() => {
-            this.$q.loading.hide()
-          }, 2000)
-          this.$store.dispatch('setPage', this.pageChange) //Update page number when the component is loaded successfully
-        })
-        .catch((error) => {
-          this.$q.loading.hide()
-          this.showErrorNotif(error.message)
-          this.pageChange = this.pageNumber // Don't change the page number on errors
-        })
-    }
-  },
-
-  computed: {
-    ...mapState({
-      pokemons: state => state.pokemon.pokemons.pokemons,
-      pageNumber: state => state.current.page,
-      
-    }),
-    pageChange: {
-      get: function() {
-        return this.$store.state.current.pageChange
-      },
-      set: function(value) {
-        this.$store.dispatch('setPageChange', value)
-      },
+    onLoad (index, done) {
+      // Infinite Scroll Loading 
+      if(this.pokemons.length <= (800 - this.infScrollSize)){
+        setTimeout(() =>{
+          let additionalPokemons = this.allPokemons.slice(
+            this.pokemons.length,this.pokemons.length + this.infScrollSize 
+          )
+          this.pokemons = [...this.pokemons, ...additionalPokemons]
+          done()
+        }, 800)  
+      }
+      else{
+        done()
+      }     
     }
   },
 
   watch: {
-    pageChange(){
-      this.changePageNumber()
+    searchInput(){
+      if(this.searchInput.length > 0){
+        let foundPokemons = allPokemons.filter(pokemon => 
+          pokemon.name.includes(this.searchInput.toLowerCase())
+        )
+        //if(foundPokemons.length < 10) 
+        this.searchPokemons = foundPokemons
+        if(foundPokemons.length === 0) this.showErrorNotif('No match found')
+      }
+      else{
+        this.searchPokemons = null
+      }
     },
   }
 }
@@ -179,6 +191,9 @@ export default {
 <style lang="scss" scoped>
   main {
     background-color: $primaryBlue;
+  }
+  .q-list {
+    display: inline !important;
   }
   .my-card{
     background-color: $cardWhite; 
