@@ -240,10 +240,11 @@ export default {
     background-color: $secondaryBlue;
     cursor:pointer;
     z-index:1;
-    transform: rotate(1deg);
-    -webkit-transform: rotate(1deg);
-    -moz-transform: rotate(1deg);
-    -o-transform: rotate(1deg);
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform:scale(1.05);
+    -o-transform: scale(1.05);
+    -ms-transform: scale(1.05);
   }
   a { 
     text-decoration: none;
