@@ -265,6 +265,7 @@ export default {
     background-color: $mainNav;
     text-decoration: none;
     height: 55px;
+    z-index:2;
   }
   .search:focus {
     background-color: $mainNav;
