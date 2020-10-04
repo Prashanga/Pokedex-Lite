@@ -2,7 +2,7 @@
   <q-header bordered class="text-white " >
     <q-toolbar >
       <q-toolbar-title >
-        <a @click="$router.go(-1)" class="no-margin no-padding">
+        <a @click="mainPageVisited === 0 ? $router.push('/') : $router.go(-1)" class="no-margin no-padding">
           <q-icon name="fas fa-times" class="backIcon no-margin no-padding" />
         </a>
       </q-toolbar-title>
@@ -12,10 +12,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
   name: 'NavbarPokemonPage',
-
+  computed: {
+    ...mapState({
+      mainPageVisited: state => state.current.mainPageVisited,
+    }),
+  }
 }
 </script>
 

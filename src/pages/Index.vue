@@ -131,6 +131,9 @@ export default {
   beforeMount() {
     this.pokemons = this.allPokemons.slice(0,this.totalPokemonsLoaded)
   },
+  mounted(){
+    this.$store.dispatch('setMainPageVisited', 1)
+  },
 
   methods:{
     getTypeIconColor(type){
@@ -195,7 +198,7 @@ export default {
   },
   computed: {
     ...mapState({
-      totalPokemonsLoaded: state => state.current.pokemonsLoaded
+      totalPokemonsLoaded: state => state.current.pokemonsLoaded,
     }),
   }
 }

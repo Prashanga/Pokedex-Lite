@@ -7,7 +7,7 @@
         <div class="col-sm-5 col-xs-12">
           <div class="row justify-center">
             <div class="col-12 text-center ">
-              <img v-if="pokemon" :src="getImageUrl(pokemon)" class="mainImage" />
+              <img v-if="pokemon" :src="getImageUrl()" class="mainImage" />
             </div>
 
             <div v-if="pokemon" class="highlight-box col-12">
