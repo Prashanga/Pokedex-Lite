@@ -12,19 +12,10 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
 
 export default {
-
   name: 'NavbarPokemonPage',
-  computed: {
-    ...mapState({
-    color: state => state.current.pokemonPageColor
-    }),
-    ...mapGetters([
-      'name'
-    ])
-  },
+
 }
 </script>
 

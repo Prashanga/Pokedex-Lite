@@ -15,17 +15,13 @@ const routes = [
     },
   },
   {
-    path: '/pokemon/:id/:name', 
+    path: '/pokemon/:id/', 
     name: 'PokemonPage',
-    component: () => import('pages/PokemonPage.vue'), 
-    props: true,
+    component: () => import('pages/PokemonPage.vue'),
     meta: {
       title: 'Pokédex',
     }
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '*',
     component: () => import('pages/Error404.vue'),

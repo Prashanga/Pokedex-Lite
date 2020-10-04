@@ -42,17 +42,13 @@
 <script>
 import NavbarPokemonPage from '../components/NavbarPokemonPage.vue'
 import PokemonService from '../services/PokemonService'
-import { mapState } from 'vuex'
+import { Type_Icon_Colors } from '../utils/constants'
 import Chart from 'chart.js'
 
 export default {
   name: 'PokemonPage',
-  props: {
-    id: Number,
-    name: String
-  },
 
-  components: { NavbarPokemonPage },
+components: { NavbarPokemonPage },
 
   data() {
     return{
@@ -79,12 +75,11 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      color: state => state.current.pokemonPageColor
-    }),
     getColor() {
       return {
-        '--color': this.color
+        '--color': this.pokemon ? 
+          this.getNavbarColor(this.pokemon.types[0].type.name) :
+          'fff'
       }
     },
     types(){
@@ -102,6 +97,9 @@ export default {
     },
     baseStats(){
       return this.pokemon.stats.map(stat => stat.base_stat)
+    },
+    id() {
+      return this.$route.params['id']
     }
   },  
 
@@ -133,6 +131,9 @@ export default {
         badgeTextColor: 'transparent',
         badgeClass: 'shadow-0',
       })
+    },
+    getNavbarColor(type){
+      return Type_Icon_Colors[type]
     },
     showChart() {
       new Chart(this.$refs.statsChart, {
@@ -191,8 +192,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  $color: var(--color);
-
   .q-page-container {
     overflow-x: hidden; 
   }

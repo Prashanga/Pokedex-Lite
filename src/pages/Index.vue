@@ -9,9 +9,7 @@
     <div class="row justify-center q-gutter-xs q-mt-xs">
       <div v-for="pokemon in pokemons" :key="pokemon.id">
         <router-link 
-          :to="{name: 'PokemonPage', 
-          params: { id: pokemon.id, name: pokemon.name}}" 
-          @click.native = "setPokemon(pokemon)"  
+          :to='`/pokemon/${pokemon.id}`'
         >
      
         <q-card class="my-card">
@@ -52,9 +50,7 @@
     <div v-if="searchInput.length >= 1" class="row justify-center q-gutter-xs q-mt-xs">
       <div v-for="pokemon in searchPokemons" :key="pokemon.id">
         <router-link 
-          :to="{name: 'PokemonPage', 
-          params: { id: pokemon.id, name: pokemon.name}}" 
-          @click.native = "setPokemon(pokemon)"  
+          :to='`/pokemon/${pokemon.id}`'
         >
      
         <q-card class="my-card">
@@ -144,13 +140,6 @@ export default {
       return pokemon.sprites.dream_world || 
           pokemon.sprites.front_default || 
           '/imagenotavailable.png'
-    },
-    setPokemon(pokemon){
-      let color =  this.getTypeIconColor(pokemon.types[0].type.name)
-      this.$nextTick(() => {
-        this.$store.dispatch('setColor',color)
-        this.$store.dispatch('setPokemon', pokemon)
-      })
     },
     pokemonCardName(name){
       const names = ['ho-oh']
