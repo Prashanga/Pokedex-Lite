@@ -2,7 +2,7 @@
 <q-layout view="hHh lpR fFf">
   <Navbar />
   <q-page-container>
-    <q-page class="flex flex-center about-page">
+    <q-page class="flex about-page">
       <div class="about-content">
         <h1>
           About Pokédex Lite 
@@ -19,6 +19,10 @@
       </div>
     </q-page>
   </q-page-container>
+   <q-footer class="footer">
+      <q-toolbar> 
+      </q-toolbar>
+    </q-footer>
 </q-layout>
         
 </template>
@@ -35,12 +39,10 @@ export default {
 <style lang="scss" scoped>
   .about-page {
     background-color: $primaryBlue;
-    height: 100vh;
     overflow: hidden;
   }
   .about-content {
     width:100%;
-    height: 100%;
     margin: 0 3rem;
     padding: 0 6rem 9rem;
     background-color: $cardWhite;
@@ -63,7 +65,6 @@ export default {
     font-weight: 500;
     font-size: 1.5rem;
     display: inline-block;
-    
   }
   .link__quasar {
     color: #135BA2;
@@ -80,6 +81,9 @@ export default {
       transform: scale(1.3);
       transition: all 0s ease-in-out;
     }
+  }
+  .footer {
+    background-color: $mainNav;
   }
 
 </style>
