@@ -8,7 +8,7 @@
           About Pokédex Lite 
         </h1>
         <p>
-          Hello, I've built this application to learn <a href="https://quasar.dev/" target="_blank" class="link__quasar">Quasar</a> framework and to practice implementing real-world external APIs
+          Hello, I've built this application to learn <a href="https://quasar.dev/" target="_blank" class="link__quasar">Quasar</a> framework and to practice implementing real-world external APIs.
           All the resources including the Pokemon details and images have been provided by <a href="https://pokeapi.co/"  target="_blank" class="link__pokeapi">PokéApi</a>.
           This application is developed for learning and educational purposes only, abiding by the Fair Use Policy of the API provider.
         </p>
@@ -49,13 +49,14 @@ export default {
   }
   h1 {
     font-size: 2rem;
+    line-height: 4rem;
     text-align: center;
     margin-bottom: 1rem;
     font-weight: bold;
     color: $mainNav;
   }
   p {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     line-height: 2rem;
     text-align: justify;
   }
@@ -85,5 +86,52 @@ export default {
   .footer {
     background-color: $mainNav;
   }
+  
+  @media only screen 
+  and (min-device-width: 600px) 
+  and (max-device-width: 1024px)
+  {
+    h1 {
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 0;
+      font-weight: bold;
+      color: $mainNav;
+    }
+    p {
+      font-size: 1.2rem;
+      text-align: justify;
+    }
+    .about-content {
+      padding: 0 3rem;
+    }
+    .link__quasar:active {
+      transform: scale(1.2);
+      transition: all 0s ease-in-out;
+    }
+  }
 
+  @media only screen 
+  and (max-device-width: 599px)
+  {
+    .about-content {
+      margin: 0;
+      padding: 0 2.5rem;
+    }
+    h1 {
+      font-size: 1.2rem;
+      margin-bottom: 0;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.8rem;
+    }
+    a {
+      font-size: 1.1rem;
+    }
+    .link__quasar:active {
+      transform: scale(1.2);
+      transition: all 0s ease-in-out;
+    }
+  }
 </style>

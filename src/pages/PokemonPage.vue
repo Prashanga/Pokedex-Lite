@@ -35,6 +35,10 @@
 
     </q-page>
     </q-page-container>
+       <q-footer class="footer">
+      <q-toolbar> 
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
@@ -192,6 +196,9 @@ components: { NavbarPokemonPage },
 </script>
 
 <style lang="scss" scoped>
+
+   $color: var(--color);
+
   .q-page-container {
     overflow-x: hidden; 
   }
@@ -296,5 +303,8 @@ components: { NavbarPokemonPage },
     .highlight-box{
       margin-top: 25px;
     }
+  }
+  .footer {
+    background-color: $color;
   }
 </style>
