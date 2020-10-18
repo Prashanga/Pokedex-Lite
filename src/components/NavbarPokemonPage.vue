@@ -2,11 +2,12 @@
   <q-header bordered class="text-white " >
     <q-toolbar >
       <q-toolbar-title >
-        <a @click="mainPageVisited === 0 ? $router.push('/') : $router.go(-1)" class="no-margin no-padding">
-          <q-icon name="fas fa-times" class="backIcon no-margin no-padding" />
+
+        <a @click="mainPageVisited === 0 ? $router.push('/') : $router.go(-1)">
+          <q-icon name="fas fa-times" class="backIcon" />
         </a>
+
       </q-toolbar-title>
-        
     </q-toolbar>
   </q-header>
 </template>
@@ -40,14 +41,14 @@ export default {
     color: black;
     cursor: pointer;
     font-size: 1.3rem;
-    vertical-align: baseline !important;
+    vertical-align: baseline;
   }
   .backIcon:hover {
     background-color: black;
     color: white;
   }
   .q-toolbar{
-    height: 75px !important;
+    height: 75px;
   }
 
 </style>
