@@ -1,115 +1,150 @@
 <template>
-<div>
- <q-layout view="hHh lpR fFf">
-   <Navbar />
+<q-layout view="hHh lpR fFf">
+  <Navbar />
   <q-page-container>
-
-  <q-page class="flex flex-center">
-   <q-infinite-scroll v-show="searchInput.length < 1" @load="onLoad" class="q-mb-xl">
-    <div class="row justify-center q-gutter-xs q-mt-xs">
-      <div v-for="pokemon in pokemons" :key="pokemon.id">
-        <router-link 
-          :to='`/pokemon/${pokemon.id}`'
-        >
-     
-        <q-card class="my-card">
-          <img :alt="pokemon.name" :src="getImageUrl(pokemon)" class="q-pt-xs q-pb-none q-mb-none card-image">
-         
-          <q-card-section class="bottom-card-section q-pt-sm">
-            <div class="pokemon-id">
-              {{`${pokemon.id}`}}
-            </div>
-            <div class="pokemon-name-text text-center">
-              {{ pokemonCardName(pokemon.name) }}
-            </div>
-            <div class="row justify-center">
-              <span 
-                v-for="type in pokemon.types" 
-                :key="type.type.name" 
-                class="q-mx-xs type-icons" 
-                :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block',  background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
-                :title="type.type.name">
-                
-              </span>
-            </div>
-          </q-card-section>  
-        </q-card>
-        </router-link>
-      </div>
-    </div>
-    
-    <template v-slot:loading>
-      <div class="row justify-center q-my-md">
-        <q-spinner-dots color="black" size="40px" />
-      </div>
-    </template>
-   </q-infinite-scroll>
-
-      <!--        Div for Search pokemons      -->
-
-    <div v-if="searchInput.length >= 1" class="row justify-center q-gutter-xs q-mt-xs">
-      <div v-for="pokemon in searchPokemons" :key="pokemon.id">
-        <router-link 
-          :to='`/pokemon/${pokemon.id}`'
-        >
-     
-        <q-card class="my-card">
-          <img 
-            :alt="pokemon.name" 
-            :src="getImageUrl(pokemon)" 
-            class="q-pt-xs q-pb-none q-mb-none card-image"
+    <q-page class="flex flex-center">
+      <q-infinite-scroll 
+        v-show="searchInput.length < 1" 
+        @load="onLoad" 
+        class="q-mb-xl"
+      >
+        <section class="row justify-center q-gutter-xs q-mt-xs">
+          <div 
+            v-for="pokemon in pokemons" 
+            :key="pokemon.id"
           >
-         
-          <q-card-section class="bottom-card-section q-pt-sm">
-            <div class="pokemon-id">
-              {{`${pokemon.id}`}}
-            </div>
-            <div class="pokemon-name-text text-center">
-              {{ pokemonCardName(pokemon.name) }}
-            </div>
-            <div class="row justify-center">
-              <span 
-                v-for="type in pokemon.types" 
-                :key="type.type.name" 
-                class="q-mx-xs type-icons" 
-                :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block',  background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
-                :title="type.type.name">
-                
-              </span>
-            </div>
-          </q-card-section>  
-        </q-card>
-        </router-link>
-      </div>
-    </div>
-    
-    <q-input 
-      label-color="grey-1" 
-      dark 
-      filled 
-      class="search" 
-      v-model="searchInput" 
-      label="Search" 
-    >
-      <template v-if="searchInput.length" v-slot:append>
-        <q-icon name="close" @click="searchInput = ''" class="cursor-pointer" />
-      </template>
-      <template v-else v-slot:append>
-        <q-icon name="search" />
-      </template>
-    </q-input>
+            <router-link 
+              :to='`/pokemon/${pokemon.id}`'
+            >
+              <q-card class="my-card">
+                <img 
+                  :alt="pokemon.name" 
+                  :src="getImageUrl(pokemon)" class="q-pt-xs q-pb-none q-mb-none card-image"
+                >
+              
+                <q-card-section class="bottom-card-section q-pt-sm">
+                  <div class="pokemon-id">
+                    {{`${pokemon.id}`}}
+                  </div>
 
-    <q-inner-loading :showing="pageFirstLoadSpinner" class="initialLoader">
-      <q-spinner-ball size="58px" color="black" />
-    </q-inner-loading>
-  </q-page>
+                  <div class="pokemon-name-text text-center">
+                    {{ pokemonCardName(pokemon.name) }}
+                  </div>
+
+                  <div class="row justify-center">
+                    <span 
+                      v-for="type in pokemon.types" 
+                      :key="type.type.name" 
+                      class="q-mx-xs type-icons" 
+                      :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block',  background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
+                      :title="type.type.name">
+                    </span>
+                  </div>
+                </q-card-section>  
+              </q-card>
+            </router-link>
+          </div>
+        </section>
+        
+        <template v-slot:loading>
+          <div class="row justify-center q-my-md">
+            <q-spinner-dots 
+              color="black" 
+              size="40px" 
+            />
+          </div>
+        </template>
+      </q-infinite-scroll>
+
+        <!--        For Search pokemons      -->
+
+      <div 
+        v-if="searchInput.length >= 1" 
+        class="row justify-center q-gutter-xs q-mt-xs"
+      >
+        <div 
+          v-for="pokemon in searchPokemons" 
+          :key="pokemon.id"
+        >
+          <router-link 
+            :to='`/pokemon/${pokemon.id}`'
+          >
+            <q-card class="my-card">
+              <img 
+                :alt="pokemon.name" 
+                :src="getImageUrl(pokemon)" 
+                class="q-pt-xs q-pb-none q-mb-none card-image"
+              >
+            
+              <q-card-section class="bottom-card-section q-pt-sm">
+                <div class="pokemon-id">
+                  {{`${pokemon.id}`}}
+                </div>
+
+                <div class="pokemon-name-text text-center">
+                  {{ pokemonCardName(pokemon.name) }}
+                </div>
+
+                <div class="row justify-center">
+                  <span 
+                    v-for="type in pokemon.types" 
+                    :key="type.type.name" 
+                    class="q-mx-xs type-icons" 
+                    :style="{maskImage: `url(icons/${type.type.name}.svg)`, display: 'inline-block',  background: getTypeIconColor(type.type.name), maskSize: 'cover'}" 
+                    :title="type.type.name"
+                  >
+                  </span>
+                </div>
+              </q-card-section>  
+            </q-card>
+          </router-link>
+        </div>
+      </div>
+      
+      <q-input 
+        label-color="grey-1" 
+        dark 
+        filled 
+        class="search" 
+        v-model="searchInput" 
+        label="Search" 
+      >
+        <template 
+          v-if="searchInput.length" 
+          v-slot:append
+        >
+          <q-icon 
+            name="close" 
+            @click="searchInput = ''" 
+            class="cursor-pointer" 
+          />
+        </template>
+        <template 
+          v-else 
+          v-slot:append
+        >
+          <q-icon 
+            name="search" 
+          />
+        </template>
+      </q-input>
+
+      <q-inner-loading 
+        :showing="pageFirstLoadSpinner" 
+        class="initialLoader"
+      >
+        <q-spinner-ball 
+          size="58px" 
+          color="black" 
+        />
+      </q-inner-loading>
+    </q-page>
   </q-page-container>
-  </q-layout>
-</div>
+</q-layout>
 </template>
 
 <script>
-import { Type_Icon_Colors, InfScrollSize } from '../utils/constants'
+import { Type_Icon_Colors, InfScrollSize, PokemonNamesWithDashes } from '../utils/constants'
 import allPokemons from '../utils/allPokemons.js'
 import Navbar from 'components/Navbar.vue'
 import { mapState } from 'vuex'
@@ -129,13 +164,14 @@ export default {
   },
 
   beforeMount() {
-    this.pokemons = this.allPokemons.slice(0,this.totalPokemonsLoaded)
+    this.pokemons = this.allPokemons.slice(0, this.totalPokemonsLoaded)
   },
   mounted(){
     this.$store.dispatch('setMainPageVisited', 1)
   },
 
   methods:{
+
     getTypeIconColor(type){
       return Type_Icon_Colors[type]
     },
@@ -145,8 +181,7 @@ export default {
           '/imagenotavailable.png'
     },
     pokemonCardName(name){
-      const names = ['ho-oh']
-      if(names.includes(name.toLowerCase()) ) {
+      if(PokemonNamesWithDashes.includes(name.toLowerCase()) ) {
         return name.charAt(0).toUpperCase() + name.slice(1)
       }
       else {
@@ -169,7 +204,7 @@ export default {
       if(this.pokemons.length <= (800 - this.infScrollSize)){
         setTimeout(() =>{
           let additionalPokemons = this.allPokemons.slice(
-            this.pokemons.length,this.pokemons.length + this.infScrollSize 
+            this.pokemons.length, this.pokemons.length + this.infScrollSize 
           )
           this.pokemons = [...this.pokemons, ...additionalPokemons]
           this.$store.dispatch('setPokemonLoaded', this.pokemons.length)
@@ -183,6 +218,7 @@ export default {
   },
 
   watch: {
+
     searchInput(){
       if(this.searchInput.length > 0){
         let foundPokemons = allPokemons.filter(pokemon => 
@@ -238,11 +274,11 @@ export default {
     -o-transform: scale(1.05);
     -ms-transform: scale(1.05);
   }
-  a { 
+  a{ 
     text-decoration: none;
     color: inherit;
   }
-  .pokemon-name-text  {
+  .pokemon-name-text {
     font-size: 0.9rem;
     margin-top: 5px;
   }
@@ -265,7 +301,7 @@ export default {
   .pagination {
     margin-bottom: 75px;
   }
-  .q-field__control{
+  .q-field__control {
     color: $mainNav !important;
   }
   
@@ -280,7 +316,7 @@ export default {
     .card-image {
       max-height: 90px;
     }
-     .bottom-card-section{
+     .bottom-card-section {
       background-color: inherit;
       height: 50px;
     }
