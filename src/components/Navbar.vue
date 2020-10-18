@@ -1,13 +1,16 @@
 <template>
   <q-header bordered class="text-white navbar">
     <q-toolbar>
-
-      <q-avatar size="60px" >
-        <img src="/favicon.svg" >
-      </q-avatar>
+      <router-link
+        to="/"
+      >
+        <q-avatar size="60px" >
+          <img src="/favicon.svg" >
+        </q-avatar>
+      </router-link>
 
       <q-toolbar-title class="title">
-        Pokédex
+        Pokédex Lite
       </q-toolbar-title>
 
       <a 
@@ -25,13 +28,12 @@
         <q-icon name="fab fa-linkedin" class="profileIcons " /> 
       </a>
 
-      <a 
-        href="#" 
-        target="_blank" 
+      <router-link
+        to="/about"
         class="q-mr-lg"
       >
         <q-icon name="fas fa-info-circle" class="profileIcons " /> 
-      </a>
+      </router-link>
     </q-toolbar>
   </q-header>
 </template>
